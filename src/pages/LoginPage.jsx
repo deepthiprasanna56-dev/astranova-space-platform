@@ -107,7 +107,7 @@ export default function LoginPage({ onNavigate }) {
   return (
     <div className="min-h-screen flex flex-col justify-between bg-slate-50 dark:bg-[#030712] text-slate-900 dark:text-slate-100 transition-colors">
       {/* Top Bar */}
-      <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-5 flex items-center justify-between">
+      <div className="w-full px-4 sm:px-6 lg:px-8 py-5 flex items-center justify-between">
         <button
           onClick={() => onNavigate('landing')}
           className="inline-flex items-center gap-2 text-xs font-orbitron font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 hover:text-cyan-500 transition-colors"

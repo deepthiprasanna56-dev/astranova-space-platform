@@ -37,17 +37,22 @@ export default function Navbar({ onNavigate, currentPage }) {
     { name: 'Flight Manifest', href: '#manifest' },
   ];
 
+  const scrollToSection = (sectionId) => {
+    const el = document.getElementById(sectionId);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   const handleLinkClick = (href) => {
     setMobileMenuOpen(false);
+    const sectionId = href.replace('#', '');
     if (currentPage !== 'landing') {
       onNavigate('landing');
-      setTimeout(() => {
-        const el = document.querySelector(href);
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
-      }, 100);
+      // Wait for landing page to mount, then scroll
+      setTimeout(() => scrollToSection(sectionId), 350);
     } else {
-      const el = document.querySelector(href);
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
+      scrollToSection(sectionId);
     }
   };
 
@@ -59,7 +64,7 @@ export default function Navbar({ onNavigate, currentPage }) {
           : 'bg-transparent py-5'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Logo with Orbital Ring */}
           <button 

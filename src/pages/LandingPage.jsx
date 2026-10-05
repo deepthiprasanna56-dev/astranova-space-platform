@@ -84,48 +84,140 @@ export default function LandingPage({ onNavigate }) {
     }
   };
 
+  const [selectedTech, setSelectedTech] = useState(null);
+
   const techPillars = [
     {
       icon: Flame,
       title: 'Magnetoplasmadynamic Drives',
       desc: 'Superheated plasma accelerated by magnetic fields achieves exhaust velocities up to 110 km/s, slashing interplanetary transit times in half.',
       tag: 'Ion Propulsion',
-      gradient: 'from-cyan-500 to-blue-600'
+      gradient: 'from-cyan-500 to-blue-600',
+      accentColor: '#22d3ee',
+      overview: 'AstraNova\'s MPD thruster array uses electromagnetic Lorentz forces to accelerate xenon plasma to exhaust velocities far exceeding any chemical rocket. Combined with the VASIMR RF-200 variable-thrust engine, our propulsion suite can shift between high-thrust orbital insertion burns and ultra-efficient deep-space cruise modes.',
+      specs: [
+        { label: 'Max Exhaust Velocity', value: '110 km/s' },
+        { label: 'Specific Impulse (Isp)', value: '9,600 – 30,000 s' },
+        { label: 'Continuous Thrust', value: '2.4 N per bank (×4 banks)' },
+        { label: 'Power Consumption', value: '50 kW (ion) / 200 kW (VASIMR)' },
+        { label: 'Propellant', value: 'Xenon (primary) / Krypton (backup)' },
+        { label: 'Delta-V Budget', value: '12,000 m/s (Earth–Mars cycle)' },
+        { label: 'Earth–Mars Transit', value: '39 days (vs. 7 months chemical)' },
+        { label: 'Thruster Lifespan', value: '>50,000 operating hours' },
+      ],
+      systems: ['Xenon Hall-Effect Thruster Bank α/β', 'VASIMR RF-200 Plasma Engine γ', 'RCS 12× Mono-prop Attitude Array', 'Emergency Solid-Fuel Retro ε', 'Propellant Feed & Pressure Control'],
+      status: 'Firing — Bank α Active',
+      statusColor: 'text-cyan-400 bg-cyan-950 border-cyan-800',
     },
     {
       icon: Orbit,
       title: 'Centrifugal Gravity Rings',
       desc: 'Dual counter-rotating cylindrical habitats generate a continuous 1.0G Earth-equivalent vector, mitigating bone density loss on long voyages.',
       tag: 'Habitation',
-      gradient: 'from-violet-500 to-indigo-600'
+      gradient: 'from-violet-500 to-indigo-600',
+      accentColor: '#a78bfa',
+      overview: 'The AstraNova Gravity Ring System uses dual counter-rotating tori to generate artificial gravity without inducing net angular momentum on the spacecraft. Crew health data shows zero bone density loss or muscle atrophy in 18-month deep-space missions — a critical breakthrough for Mars transit.',
+      specs: [
+        { label: 'Ring Diameter', value: '120 meters (outer torus)' },
+        { label: 'Rotation Speed', value: '4.2 RPM' },
+        { label: 'Simulated Gravity', value: '0.98 g (±0.02 g variance)' },
+        { label: 'Crew Capacity', value: '18 permanent residents' },
+        { label: 'Living Volume', value: '14,400 m³ pressurized' },
+        { label: 'Radiation Shielding', value: 'Water-wall 12cm + Magnetic 4.2T' },
+        { label: 'Air Pressure', value: '101.3 kPa (Earth sea-level)' },
+        { label: 'Bone Density Loss', value: '0% (vs. 1-2%/month ISS)' },
+      ],
+      systems: ['Counter-Rotating Torus Drive System', 'Active Vibration Isolation Mounts', 'Airlock & Docking Collar Node', 'Emergency Derotation Braking', 'Pressure Vessel Integrity Sensors'],
+      status: 'Fully Operational',
+      statusColor: 'text-emerald-400 bg-emerald-950 border-emerald-800',
     },
     {
       icon: Wind,
       title: 'Closed-Loop ECLSS Biosphere',
       desc: 'Genetically engineered spirulina bioreactors produce 99.2% recyclable oxygen, water recapture, and fresh nutrient biomass in deep space.',
       tag: 'Life Support',
-      gradient: 'from-emerald-500 to-teal-600'
+      gradient: 'from-emerald-500 to-teal-600',
+      accentColor: '#34d399',
+      overview: 'AstraNova\'s Environmental Control and Life Support System achieves near-perfect closed-loop recapture of all water, oxygen, and carbon. The bioreactor module uses CRISPR-optimized Spirulina platensis algae strains that produce oxygen 8× faster than wild-type while simultaneously synthesizing crew nutrition.',
+      specs: [
+        { label: 'O₂ Purity Output', value: '99.4% (cabin atmospheric)' },
+        { label: 'Water Recapture Rate', value: '98.7% (urine + condensate)' },
+        { label: 'CO₂ Scrub Efficiency', value: '99.96% (CDRA 4-bed sieve)' },
+        { label: 'Bioreactor Volume', value: '800 liters (Spirulina culture)' },
+        { label: 'Daily O₂ Production', value: '2.8 kg/person/day' },
+        { label: 'Resupply Interval', value: '18 months (consumables only)' },
+        { label: 'Cabin Pressure', value: '14.7 psi (sea-level equivalent)' },
+        { label: 'Temperature Control', value: '21.0–22.0 °C (±0.5°C)' },
+      ],
+      systems: ['OGS Oxygen Generation (Sabatier)', 'CDRA CO₂ Removal 4-Bed Sieve', 'WPA Water Processor Assembly', 'Spirulina Bioreactor Module', 'ATCS Thermal Control Loops'],
+      status: '99.4% O₂ — Nominal',
+      statusColor: 'text-emerald-400 bg-emerald-950 border-emerald-800',
     },
     {
       icon: Radio,
       title: 'Quantum Deep-Space Relays',
       desc: 'Entangled photon transceiver arrays transmit gigabit telemetry streams across billions of kilometers with sub-nanosecond jitter.',
       tag: 'Communications',
-      gradient: 'from-amber-500 to-orange-600'
+      gradient: 'from-amber-500 to-orange-600',
+      accentColor: '#fbbf24',
+      overview: 'AstraNova\'s hybrid quantum-classical deep space network eliminates traditional light-speed communication delays for critical telemetry. Quantum entanglement channels handle command & control data with zero latency, while X-Band and Ka-Band phased arrays carry high-bandwidth science data at up to 10 Gbps.',
+      specs: [
+        { label: 'Quantum Channel Latency', value: '0.00s (entangled pairs)' },
+        { label: 'Classical DSN Uplink', value: '2.115 GHz X-Band (Canberra 70m)' },
+        { label: 'Data Rate (Ka-Band)', value: '10 Gbps @ Mars opposition' },
+        { label: 'Dish Aperture', value: '5m HGA steerable parabolic' },
+        { label: 'Signal Coverage', value: 'Earth to Kuiper Belt (50 AU)' },
+        { label: 'Relay Nodes', value: '5 stations (DSN + L1 Quantum)' },
+        { label: 'Encryption', value: 'Post-quantum lattice cryptography' },
+        { label: 'Uptime SLA', value: '99.97% (3-station redundancy)' },
+      ],
+      systems: ['Canberra DSN 70m Station (Primary)', 'Goldstone X/S-Band Array', 'Madrid Ka-Band Station', 'L1 Quantum Entanglement Node', 'Mars Reconnaissance UHF Relay'],
+      status: 'Signal Locked — DSN-CAN',
+      statusColor: 'text-amber-400 bg-amber-950 border-amber-800',
     },
     {
       icon: ShieldCheck,
       title: 'Active Magnetic Deflection',
       desc: 'Superconducting electromagnetic shields create an artificial magnetosphere around the hull, deflecting dangerous solar proton storms.',
       tag: 'Radiation Armor',
-      gradient: 'from-rose-500 to-pink-600'
+      gradient: 'from-rose-500 to-pink-600',
+      accentColor: '#f87171',
+      overview: 'Solar energetic particle events and galactic cosmic rays are the primary hazard for long-duration deep space missions. AstraNova\'s superconducting coil array generates a 4.2-Tesla dipole field — equivalent to 10× Earth\'s magnetosphere — completely encasing the crew habitat in an invisible radiation shield.',
+      specs: [
+        { label: 'Magnetic Field Strength', value: '4.2 Tesla (dipole)' },
+        { label: 'Protected Volume', value: '50m radius around crew module' },
+        { label: 'GCR Attenuation', value: '94.2% Galactic Cosmic Ray flux' },
+        { label: 'SPE Protection', value: '99.8% Solar Proton Event' },
+        { label: 'Coil Temperature', value: '-269°C (LHe superconducting)' },
+        { label: 'Power Draw', value: '480 kW (coil maintenance)' },
+        { label: 'Annual Rad Dose (crew)', value: '<20 mSv (below ICRP limit)' },
+        { label: 'Shield Mass', value: '12,400 kg (coil assembly)' },
+      ],
+      systems: ['HTS Superconducting Coil Array (×8)', 'Liquid Helium Cryocooler', 'Quench Detection & Protection', 'Real-Time Dosimetry Sensors', 'Solar Particle Event Alert System'],
+      status: '4.2 Tesla — Active',
+      statusColor: 'text-rose-400 bg-rose-950 border-rose-800',
     },
     {
       icon: Cpu,
       title: 'Autonomous Regolith Printing',
       desc: 'Heavy robotic rovers melt indigenous lunar and martian soil with concentrated solar mirrors to 3D-print pressurized habitat domes.',
       tag: 'Surface Base',
-      gradient: 'from-sky-500 to-indigo-600'
+      gradient: 'from-sky-500 to-indigo-600',
+      accentColor: '#38bdf8',
+      overview: 'Before human crews arrive, AstraNova\'s autonomous robotic construction fleet lands and begins printing habitat domes from native regolith. Concentrating solar arrays heat local soil to 1,500°C, fusing it into structural components. No Earth-sourced construction materials are required — enabling self-sustaining colonization.',
+      specs: [
+        { label: 'Print Speed', value: '2.4 m³/hour structural output' },
+        { label: 'Wall Thickness', value: '3.2 meters (radiation + pressure)' },
+        { label: 'Habitat Internal Volume', value: '1,200 m³ per dome module' },
+        { label: 'Regolith Sintering Temp', value: '1,500°C (solar concentrator)' },
+        { label: 'Construction Fleet', value: '6× autonomous rovers/printer units' },
+        { label: 'Time to First Habitat', value: '90 Earth days (uncrewed prep)' },
+        { label: 'Pressure Rating', value: '14.7 psi (Earth sea-level)' },
+        { label: 'Operational Sites', value: 'Moon Shackleton + Mars Jezero' },
+      ],
+      systems: ['Regolith Excavator Rover (×2)', 'Concentrated Solar Array (4m²)', 'Sintering Print Head Assembly', 'Structural Integrity Inspector Bot', 'Autonomous Mission Control AI'],
+      status: 'Printing — Jezero Dome 4',
+      statusColor: 'text-sky-400 bg-sky-950 border-sky-800',
     }
   ];
 
@@ -171,7 +263,7 @@ export default function LandingPage({ onNavigate }) {
       <div className="absolute top-96 right-0 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl pointer-events-none -z-10" />
 
       {/* Hero Section */}
-      <section className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-20 lg:pt-20 lg:pb-28 text-center">
+      <section className="relative w-full px-4 sm:px-6 lg:px-8 pt-12 pb-20 lg:pt-20 lg:pb-28 text-center">
         {/* Mission Status Ticker */}
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-semibold bg-cyan-50 dark:bg-cyan-950/70 border border-cyan-200 dark:border-cyan-800 text-cyan-700 dark:text-cyan-300 mb-8 animate-fade-in hover:scale-105 transition-transform cursor-pointer shadow-sm">
           <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
@@ -357,7 +449,7 @@ export default function LandingPage({ onNavigate }) {
       {/* Interactive Planetary Habitability & Transit Simulator */}
       <section id="simulator" className="py-24 bg-slate-900/90 text-white relative border-y border-cyan-950">
         <div className="absolute inset-0 bg-[radial-gradient(#06b6d4_1px,transparent_1px)] [background-size:24px_24px] opacity-15"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative w-full px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-3xl mx-auto mb-14">
             <span className="text-xs font-orbitron font-bold uppercase tracking-wider text-cyan-400 bg-cyan-950/80 px-3.5 py-1.5 rounded-full border border-cyan-800">
@@ -455,7 +547,7 @@ export default function LandingPage({ onNavigate }) {
       </section>
 
       {/* Breakthrough Technology Pillars */}
-      <section id="propulsion" className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="propulsion" className="py-24 w-full px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <span className="text-xs font-orbitron font-bold uppercase tracking-wider text-cyan-600 dark:text-cyan-400 bg-cyan-50 dark:bg-cyan-950/80 px-3.5 py-1.5 rounded-full border border-cyan-200 dark:border-cyan-800">
             Deep Space Architecture
@@ -474,7 +566,8 @@ export default function LandingPage({ onNavigate }) {
             return (
               <div
                 key={idx}
-                className="group relative p-8 rounded-3xl bg-white dark:bg-[#070e20] border border-slate-200/80 dark:border-cyan-950/80 hover:border-cyan-500 dark:hover:border-cyan-500 shadow-sm hover:shadow-xl hover:shadow-cyan-500/10 transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between"
+                onClick={() => setSelectedTech(p)}
+                className="group relative p-8 rounded-3xl bg-white dark:bg-[#070e20] border border-slate-200/80 dark:border-cyan-950/80 hover:border-cyan-500 dark:hover:border-cyan-500 shadow-sm hover:shadow-xl hover:shadow-cyan-500/10 transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between cursor-pointer"
               >
                 <div>
                   <div className="flex items-center justify-between mb-5">
@@ -505,9 +598,110 @@ export default function LandingPage({ onNavigate }) {
         </div>
       </section>
 
+      {/* Orbital Habitats Section */}
+      <section id="habitats" className="py-24 bg-slate-100/60 dark:bg-[#040a18] relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(#06b6d460_1px,transparent_1px)] [background-size:28px_28px] opacity-10 pointer-events-none"></div>
+        <div className="relative w-full px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-14">
+            <span className="text-xs font-orbitron font-bold uppercase tracking-wider text-cyan-600 dark:text-cyan-400 bg-cyan-50 dark:bg-cyan-950/80 px-3.5 py-1.5 rounded-full border border-cyan-200 dark:border-cyan-800">
+              Orbital Habitat Engineering
+            </span>
+            <h2 className="font-display text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-white mt-4">
+              Where Humans Live In Deep Space
+            </h2>
+            <p className="text-slate-600 dark:text-slate-400 mt-3 text-base">
+              Our permanent orbital and surface habitats are engineered to sustain human life indefinitely across the solar system — with artificial gravity, closed biospheres, and radiation shielding.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                name: 'Lunar Gateway Station Alpha',
+                orbit: 'Moon High Orbit (L2 Halo)',
+                crew: '18 permanent residents',
+                gravity: '1.0 g (centrifuge)',
+                power: '840 MW fusion + solar',
+                shielding: 'Water-wall + 4.2T magnetic',
+                desc: 'The primary interplanetary waypoint and cislunar staging hub. Dual counter-rotating rings provide continuous Earth-equivalent gravity for long-duration crews.',
+                status: 'Fully Operational',
+                statusColor: 'text-emerald-400 bg-emerald-950 border-emerald-800',
+                accentColor: 'from-cyan-500 to-blue-600',
+              },
+              {
+                name: 'Ares Prime Mars Outpost',
+                orbit: 'Mars Surface — Jezero Basin (28°N)',
+                crew: '8 science & engineering crew',
+                gravity: '0.38 g (surface Martian)',
+                power: '220 MW micro-fusion reactor',
+                shielding: 'Basalt regolith 3m overhead dome',
+                desc: 'Pressurized lava-tube habitat system buried under Martian regolith for radiation protection. First permanent human settlement on another planet.',
+                status: 'Active Operations',
+                statusColor: 'text-amber-400 bg-amber-950 border-amber-800',
+                accentColor: 'from-amber-500 to-rose-600',
+              },
+              {
+                name: 'Europa Oceanus Submersible',
+                orbit: 'Europa — Subsurface Ocean (15km depth)',
+                crew: 'Autonomous AI + 4 remote operators',
+                gravity: '0.134 g (surface)',
+                power: '12 MW RTG radioisotope core',
+                shielding: 'Titanium pressure hull (8,000 psi)',
+                desc: 'Cryogenic drill-through probe habitat operating in Europa\'s global saltwater ocean. Searching for microbial life in one of the most promising locations in the solar system.',
+                status: 'Deep Dive Active',
+                statusColor: 'text-violet-400 bg-violet-950 border-violet-800',
+                accentColor: 'from-violet-500 to-indigo-600',
+              }
+            ].map((hab, idx) => (
+              <div key={idx} className="p-7 rounded-3xl bg-white dark:bg-[#070e20] border border-slate-200/80 dark:border-cyan-950 shadow-md hover:border-cyan-500 hover:shadow-lg hover:shadow-cyan-500/10 transition-all group">
+                <div className={`w-12 h-12 rounded-2xl bg-gradient-to-tr ${hab.accentColor} flex items-center justify-center text-white mb-5 shadow-md group-hover:scale-110 transition-transform`}>
+                  <Orbit className="w-6 h-6" />
+                </div>
+
+                <div className="flex items-center justify-between mb-2">
+                  <h3 className="font-display text-lg font-bold text-slate-900 dark:text-white">{hab.name}</h3>
+                </div>
+                <p className="text-[10px] font-mono text-slate-500 dark:text-slate-400 mb-1">{hab.orbit}</p>
+                <span className={`inline-block text-[10px] font-mono font-bold px-2 py-0.5 rounded border mb-4 ${hab.statusColor}`}>
+                  {hab.status}
+                </span>
+
+                <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-4">{hab.desc}</p>
+
+                <div className="space-y-1.5 pt-4 border-t border-slate-100 dark:border-cyan-950 text-[11px] font-mono">
+                  <div className="flex justify-between">
+                    <span className="text-slate-400">Crew Complement:</span>
+                    <span className="text-slate-900 dark:text-white font-semibold">{hab.crew}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-slate-400">Gravity Vector:</span>
+                    <span className="text-cyan-500 font-semibold">{hab.gravity}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-slate-400">Power Source:</span>
+                    <span className="text-amber-500 font-semibold">{hab.power}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-slate-400">Rad Shielding:</span>
+                    <span className="text-emerald-500 font-semibold">{hab.shielding}</span>
+                  </div>
+                </div>
+
+                <button
+                  onClick={() => onNavigate('dashboard')}
+                  className="mt-5 w-full py-2.5 rounded-xl text-xs font-orbitron font-bold uppercase tracking-wider text-black bg-cyan-400 hover:bg-cyan-300 transition-colors"
+                >
+                  View Live Habitat Telemetry
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Flight Manifest & Expeditions Section */}
       <section id="expeditions" className="py-24 bg-slate-100/60 dark:bg-[#040916] border-y border-slate-200 dark:border-cyan-950">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div id="manifest" className="w-full px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-14">
             <span className="text-xs font-orbitron font-bold uppercase tracking-wider text-cyan-600 dark:text-cyan-400 bg-cyan-50 dark:bg-cyan-950/80 px-3.5 py-1.5 rounded-full border border-cyan-200 dark:border-cyan-800">
               Flight Manifest
@@ -572,7 +766,7 @@ export default function LandingPage({ onNavigate }) {
       </section>
 
       {/* Mission Control CTA */}
-      <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 w-full px-4 sm:px-6 lg:px-8">
         <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-cyan-950 via-slate-900 to-indigo-950 text-white p-8 sm:p-14 border border-cyan-800/80 shadow-2xl">
           <div className="relative max-w-2xl">
             <span className="px-3.5 py-1 rounded-full text-xs font-orbitron font-bold uppercase tracking-wider bg-cyan-500/20 text-cyan-300 border border-cyan-500/40">
@@ -602,6 +796,116 @@ export default function LandingPage({ onNavigate }) {
           </div>
         </div>
       </section>
+
+      {/* ── Engineering Specifications Modal ── */}
+      {selectedTech && (() => {
+        const Icon = selectedTech.icon;
+        return (
+          <div
+            className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4"
+            onClick={() => setSelectedTech(null)}
+          >
+            {/* Backdrop */}
+            <div className="absolute inset-0 bg-black/80 backdrop-blur-md" />
+
+            {/* Panel */}
+            <div
+              onClick={e => e.stopPropagation()}
+              className="relative w-full sm:max-w-3xl max-h-[92dvh] overflow-y-auto rounded-t-3xl sm:rounded-3xl bg-white dark:bg-[#050c1d] border-t sm:border border-slate-200 dark:border-cyan-900/80 shadow-2xl shadow-black/60 flex flex-col"
+              style={{ '--accent': selectedTech.accentColor }}
+            >
+              {/* Modal Header */}
+              <div className="sticky top-0 z-10 bg-white/95 dark:bg-[#050c1d]/95 backdrop-blur-md p-5 sm:p-7 border-b border-slate-100 dark:border-cyan-950 flex items-start justify-between gap-4">
+                <div className="flex items-center gap-4">
+                  <div className={`w-12 h-12 rounded-2xl bg-gradient-to-tr ${selectedTech.gradient} flex items-center justify-center text-white shadow-lg shrink-0`}>
+                    <Icon className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="text-[10px] font-orbitron font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+                        {selectedTech.tag}
+                      </span>
+                      <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded border ${selectedTech.statusColor}`}>
+                        {selectedTech.status}
+                      </span>
+                    </div>
+                    <h2 className="font-display text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white mt-1">
+                      {selectedTech.title}
+                    </h2>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setSelectedTech(null)}
+                  className="p-2 rounded-xl text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors shrink-0"
+                  aria-label="Close"
+                >
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+
+              {/* Modal Body */}
+              <div className="p-5 sm:p-7 space-y-7">
+
+                {/* Overview */}
+                <div className="p-4 rounded-2xl border-l-4 bg-slate-50 dark:bg-[#07111f]" style={{ borderColor: selectedTech.accentColor }}>
+                  <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">{selectedTech.overview}</p>
+                </div>
+
+                {/* Technical Specifications */}
+                <div>
+                  <h3 className="font-orbitron font-bold text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-4">
+                    Technical Specifications
+                  </h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {selectedTech.specs.map((s, i) => (
+                      <div key={i} className="flex items-center justify-between p-3.5 rounded-xl bg-slate-50 dark:bg-[#070e20] border border-slate-200/80 dark:border-cyan-950/80 text-xs font-mono gap-4">
+                        <span className="text-slate-400 shrink-0">{s.label}</span>
+                        <span className="font-bold text-slate-900 dark:text-white text-right" style={{ color: selectedTech.accentColor }}>{s.value}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Subsystems */}
+                <div>
+                  <h3 className="font-orbitron font-bold text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-3">
+                    Integrated Subsystems
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedTech.systems.map((sys, i) => (
+                      <span
+                        key={i}
+                        className="text-[11px] font-mono px-3 py-1.5 rounded-xl border border-slate-200 dark:border-cyan-900/60 bg-white dark:bg-[#07111f] text-slate-700 dark:text-slate-300"
+                      >
+                        {sys}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* CTA Buttons */}
+                <div className="flex flex-col sm:flex-row gap-3 pt-2 border-t border-slate-100 dark:border-cyan-950">
+                  <button
+                    onClick={() => { setSelectedTech(null); onNavigate('dashboard'); }}
+                    className="flex-1 py-3 rounded-xl text-xs font-orbitron font-bold uppercase tracking-wider text-black transition-all hover:opacity-90 shadow-lg"
+                    style={{ background: selectedTech.accentColor }}
+                  >
+                    View Live Telemetry in Mission Control
+                  </button>
+                  <button
+                    onClick={() => setSelectedTech(null)}
+                    className="flex-1 py-3 rounded-xl text-xs font-orbitron font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+                  >
+                    Close Specifications
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      })()}
     </div>
   );
 }

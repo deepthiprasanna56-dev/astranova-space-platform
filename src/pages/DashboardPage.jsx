@@ -5,6 +5,11 @@ import StatCards from '../components/dashboard/StatCards';
 import ChartsSection from '../components/dashboard/ChartsSection';
 import DataTable from '../components/dashboard/DataTable';
 import QuickActionsModal from '../components/dashboard/QuickActionsModal';
+import LifeSupportPanel from '../components/dashboard/LifeSupportPanel';
+import PropulsionPanel from '../components/dashboard/PropulsionPanel';
+import CommsPanel from '../components/dashboard/CommsPanel';
+import CrewPanel from '../components/dashboard/CrewPanel';
+
 import { 
   Download, 
   Rocket, 
@@ -110,7 +115,7 @@ export default function DashboardPage({ onNavigate }) {
         />
 
         {/* Dashboard Body */}
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto">
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 w-full">
           
           {/* Welcome Deck Banner */}
           <div className="mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -242,25 +247,23 @@ export default function DashboardPage({ onNavigate }) {
             </div>
           )}
 
-          {(activeTab === 'lifesupport' || activeTab === 'propulsion' || activeTab === 'comms' || activeTab === 'crew') && (
-            <div className="p-10 rounded-3xl bg-white dark:bg-[#070e20] border border-slate-200 dark:border-cyan-950 text-center space-y-4">
-              <div className="w-14 h-14 rounded-2xl bg-cyan-50 dark:bg-cyan-950 text-cyan-400 mx-auto flex items-center justify-center font-bold">
-                <Orbit className="w-7 h-7" />
-              </div>
-              <h3 className="text-xl font-display font-bold capitalize">
-                {activeTab} Subsystem Telemetry
-              </h3>
-              <p className="text-xs font-mono text-slate-500 max-w-md mx-auto">
-                Detailed telemetry diagnostic controls for {activeTab}. Connected directly to the Lunar Gateway Station Alpha flight computer.
-              </p>
-              <button
-                onClick={() => setActiveTab('overview')}
-                className="px-5 py-2.5 bg-cyan-400 text-black font-orbitron font-bold text-xs uppercase tracking-wider rounded-xl hover:bg-cyan-300 transition-colors shadow-md"
-              >
-                Return to Command Deck
-              </button>
-            </div>
+          {activeTab === 'lifesupport' && (
+            <LifeSupportPanel onToast={showToast} />
           )}
+
+          {activeTab === 'propulsion' && (
+            <PropulsionPanel onToast={showToast} />
+          )}
+
+          {activeTab === 'comms' && (
+            <CommsPanel onToast={showToast} />
+          )}
+
+          {activeTab === 'crew' && (
+            <CrewPanel onToast={showToast} />
+          )}
+
+
 
         </main>
       </div>
