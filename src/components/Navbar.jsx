@@ -60,7 +60,7 @@ export default function Navbar({ onNavigate, currentPage }) {
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
-          ? 'bg-white/90 dark:bg-[#030712]/90 backdrop-blur-md shadow-md border-b border-slate-200/80 dark:border-cyan-950/60 py-3' 
+          ? 'bg-white/90 dark:bg-[#030712]/90 backdrop-blur-md shadow-md border-b border-slate-200/80 dark:border-orange-950/60 py-3'
           : 'bg-transparent py-5'
       }`}
     >
@@ -71,16 +71,16 @@ export default function Navbar({ onNavigate, currentPage }) {
             onClick={() => onNavigate('landing')}
             className="flex items-center gap-3 group text-left focus:outline-none"
           >
-            <div className="relative w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-600 via-indigo-600 to-violet-600 flex items-center justify-center text-white shadow-lg shadow-cyan-500/25 group-hover:scale-105 transition-transform duration-300">
+            <div className="relative w-10 h-10 rounded-xl bg-gradient-to-tr from-orange-600 via-slate-600 to-slate-600 flex items-center justify-center text-white shadow-lg shadow-orange-500/25 group-hover:scale-105 transition-transform duration-300">
               <Orbit className="w-5 h-5 group-hover:rotate-45 transition-transform duration-700" />
-              <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping"></span>
+              <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-orange-400 animate-ping"></span>
             </div>
             <div>
               <div className="flex items-center gap-2">
                 <span className="font-display text-xl font-bold tracking-tight text-slate-900 dark:text-white">
-                  ASTRA<span className="text-cyan-500">NOVA</span>
+                  ASTRA<span className="text-orange-500">NOVA</span>
                 </span>
-                <span className="hidden sm:inline-block px-1.5 py-0.5 text-[9px] font-orbitron font-semibold uppercase tracking-wider bg-cyan-100 dark:bg-cyan-950/80 text-cyan-700 dark:text-cyan-300 rounded border border-cyan-300 dark:border-cyan-800">
+                <span className="hidden sm:inline-block px-1.5 py-0.5 text-[9px] font-orbitron font-semibold uppercase tracking-wider bg-orange-100 dark:bg-orange-950/80 text-orange-700 dark:text-orange-300 rounded border border-orange-300 dark:border-orange-800">
                   DEEP SPACE
                 </span>
               </div>
@@ -93,7 +93,7 @@ export default function Navbar({ onNavigate, currentPage }) {
               <button
                 key={link.name}
                 onClick={() => handleLinkClick(link.href)}
-                className="px-3.5 py-2 text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 rounded-lg hover:bg-slate-100/60 dark:hover:bg-slate-900/60 transition-colors"
+                className="px-3.5 py-2 text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-300 hover:text-orange-600 dark:hover:text-orange-400 rounded-lg hover:bg-slate-100/60 dark:hover:bg-slate-900/60 transition-colors"
               >
                 {link.name}
               </button>
@@ -110,8 +110,8 @@ export default function Navbar({ onNavigate, currentPage }) {
                   onClick={() => onNavigate('dashboard')}
                   className={`flex items-center gap-2 px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-xl transition-all shadow-sm ${
                     currentPage === 'dashboard'
-                      ? 'bg-cyan-500 text-black font-extrabold shadow-cyan-500/25'
-                      : 'bg-cyan-50 dark:bg-cyan-950/50 text-cyan-600 dark:text-cyan-300 hover:bg-cyan-100 dark:hover:bg-cyan-900/50 border border-cyan-200 dark:border-cyan-800'
+                      ? 'bg-orange-500 text-black font-extrabold shadow-orange-500/25'
+                      : 'bg-orange-50 dark:bg-orange-950/50 text-orange-600 dark:text-orange-300 hover:bg-orange-100 dark:hover:bg-orange-900/50 border border-orange-200 dark:border-orange-800'
                   }`}
                 >
                   <Radar className="w-4 h-4" />
@@ -129,13 +129,13 @@ export default function Navbar({ onNavigate, currentPage }) {
               <div className="flex items-center gap-2.5">
                 <button
                   onClick={() => onNavigate('login')}
-                  className="px-4 py-2 text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-200 hover:text-cyan-600 dark:hover:text-cyan-400 hover:bg-slate-100 dark:hover:bg-slate-900 rounded-xl transition-all"
+                  className="px-4 py-2 text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-200 hover:text-orange-600 dark:hover:text-orange-400 hover:bg-slate-100 dark:hover:bg-slate-900 rounded-xl transition-all"
                 >
                   Flight Access
                 </button>
                 <button
                   onClick={() => onNavigate('dashboard')}
-                  className="group relative inline-flex items-center gap-2 px-4 py-2 text-xs font-bold uppercase tracking-wider text-slate-950 bg-gradient-to-r from-cyan-400 via-teal-300 to-cyan-300 rounded-xl hover:from-cyan-300 hover:to-teal-200 transition-all duration-300 shadow-md shadow-cyan-500/20 hover:shadow-cyan-500/40 hover:-translate-y-0.5 active:translate-y-0"
+                  className="group relative inline-flex items-center gap-2 px-4 py-2 text-xs font-bold uppercase tracking-wider text-slate-950 bg-gradient-to-r from-orange-400 via-amber-300 to-orange-300 rounded-xl hover:from-orange-300 hover:to-amber-200 transition-all duration-300 shadow-md shadow-orange-500/20 hover:shadow-orange-500/40 hover:-translate-y-0.5 active:translate-y-0"
                 >
                   <Rocket className="w-4 h-4 text-slate-950 group-hover:-translate-y-0.5 transition-transform" />
                   <span>Mission Control</span>
@@ -159,12 +159,12 @@ export default function Navbar({ onNavigate, currentPage }) {
 
         {/* Mobile Dropdown */}
         {mobileMenuOpen && (
-          <div className="md:hidden mt-3 pt-3 pb-4 px-3 bg-white/95 dark:bg-[#070d1d]/95 backdrop-blur-xl border border-slate-200/80 dark:border-cyan-900/60 rounded-2xl shadow-2xl animate-fade-in space-y-1">
+          <div className="md:hidden mt-3 pt-3 pb-4 px-3 bg-white/95 dark:bg-[#070d1d]/95 backdrop-blur-xl border border-slate-200/80 dark:border-orange-900/60 rounded-2xl shadow-2xl animate-fade-in space-y-1">
             {navLinks.map((link) => (
               <button
                 key={link.name}
                 onClick={() => handleLinkClick(link.href)}
-                className="w-full text-left px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-200 hover:bg-cyan-50 dark:hover:bg-cyan-950/50 hover:text-cyan-600 dark:hover:text-cyan-400 rounded-xl transition-colors"
+                className="w-full text-left px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-200 hover:bg-orange-50 dark:hover:bg-orange-950/50 hover:text-orange-600 dark:hover:text-orange-400 rounded-xl transition-colors"
               >
                 {link.name}
               </button>
@@ -176,7 +176,7 @@ export default function Navbar({ onNavigate, currentPage }) {
                   setMobileMenuOpen(false);
                   onNavigate('dashboard');
                 }}
-                className="w-full flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-black bg-cyan-400 rounded-xl shadow-md"
+                className="w-full flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-black bg-orange-400 rounded-xl shadow-md"
               >
                 <Radar className="w-4 h-4" />
                 Launch Mission Control
