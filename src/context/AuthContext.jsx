@@ -1,10 +1,10 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(() => {
-    const saved = localStorage.getItem('nexus_user');
+    const saved = localStorage.getItem('astranova_user');
     if (saved) {
       try {
         return JSON.parse(saved);
@@ -15,34 +15,35 @@ export const AuthProvider = ({ children }) => {
     return null;
   });
 
-  const [notificationCount, setNotificationCount] = useState(3);
+  const [clearanceLevel, setClearanceLevel] = useState('Level-5 Flight Director');
 
-  const login = (email, password, remember = true) => {
-    // Simulated authentication
-    const fakeUser = {
-      id: 'usr_98124',
-      name: email.split('@')[0].charAt(0).toUpperCase() + email.split('@')[0].slice(1),
-      email: email,
-      role: 'Enterprise Administrator',
-      plan: 'Pro Plan',
-      avatar: `https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80`,
-      joinedAt: 'January 2025'
+  const login = (callsign, accessCode, remember = true) => {
+    const flightUser = {
+      id: 'ASTRA-8921-X',
+      callsign: callsign.includes('@') ? callsign.split('@')[0] : callsign,
+      name: 'Commander Elena Vance',
+      clearance: 'Level-5 Mission Commander',
+      station: 'Lunar Orbital Gateway (Station Alpha)',
+      flightHours: '4,820 LEO/Deep-Space Hours',
+      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80',
+      badgeId: 'CMDR-7704',
+      status: 'Active Flight Ready',
     };
 
-    setUser(fakeUser);
+    setUser(flightUser);
     if (remember) {
-      localStorage.setItem('nexus_user', JSON.stringify(fakeUser));
+      localStorage.setItem('astranova_user', JSON.stringify(flightUser));
     }
-    return fakeUser;
+    return flightUser;
   };
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('nexus_user');
+    localStorage.removeItem('astranova_user');
   };
 
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated: !!user, login, logout, notificationCount, setNotificationCount }}>
+    <AuthContext.Provider value={{ user, isAuthenticated: !!user, login, logout, clearanceLevel, setClearanceLevel }}>
       {children}
     </AuthContext.Provider>
   );

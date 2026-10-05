@@ -1,314 +1,329 @@
 import React, { useState } from 'react';
 import { 
+  Orbit, 
+  Rocket, 
+  Radio, 
+  Compass, 
+  Globe, 
   Sparkles, 
   ArrowRight, 
   Play, 
-  Activity, 
   ShieldCheck, 
-  Cpu, 
   Zap, 
-  TrendingUp, 
-  CheckCircle2, 
-  Star, 
-  BarChart3, 
-  Database, 
-  Cloud, 
   Layers, 
-  Lock, 
-  Server, 
+  Cpu, 
+  Wind, 
+  Flame, 
+  Radar, 
+  CheckCircle2, 
   Clock, 
+  Star, 
   ChevronRight,
-  ExternalLink,
-  Users
+  Sun,
+  Eye,
+  Activity
 } from 'lucide-react';
 
 export default function LandingPage({ onNavigate }) {
-  const [billingPeriod, setBillingPeriod] = useState('annual'); // 'monthly' | 'annual'
-  const [activeMetricTab, setActiveMetricTab] = useState('performance');
+  const [selectedPlanet, setSelectedPlanet] = useState('mars');
+  const [transitEngine, setTransitEngine] = useState('ion');
 
-  const metricTabs = {
-    performance: {
-      title: 'Sub-millisecond Latency',
-      stat: '0.42 ms',
-      sub: 'p99 Global Response Time',
-      badge: '94% faster than standard pipelines',
-      description: 'Distributed edge caching and instant streaming query execution across 280+ edge nodes globally.'
+  // Planetary simulation data
+  const planetaryData = {
+    moon: {
+      name: 'Luna Shackleton Base',
+      type: 'Earth Moon · South Pole',
+      distance: '384,400 km',
+      travelTime: '3 Days (Chemical Booster)',
+      gravity: '0.166 g (16.6% Earth)',
+      temperature: '-130°C to +120°C',
+      atmosphere: 'Near Vacuum (Trace Helium/Argon)',
+      waterIce: 'Estimated 600M metric tons in craters',
+      badge: 'Permanent Lunar Gateway Station',
+      color: 'from-slate-400 to-zinc-600',
+      accent: 'text-slate-300'
     },
-    efficiency: {
-      title: 'Compute Optimization',
-      stat: '$148.5K',
-      sub: 'Average Annual Savings',
-      badge: 'Up to 38% reduced cloud spend',
-      description: 'Dynamic resource re-allocation continuously trims over-provisioned Kubernetes clusters and unattached EBS volumes.'
+    mars: {
+      name: 'Ares Prime Outpost',
+      type: 'Mars · Jezero Basin Colony',
+      distance: '225 Million km (Avg)',
+      travelTime: '115 Days (Nuclear-Thermal Pulse)',
+      gravity: '0.379 g (38% Earth)',
+      temperature: '-63°C Average',
+      atmosphere: '95.3% Carbon Dioxide, 2.6% N2',
+      waterIce: 'Polar Ice Caps & Subsurface Glaciers',
+      badge: 'Active Terraforming & Biosphere Alpha',
+      color: 'from-amber-600 to-rose-700',
+      accent: 'text-amber-400'
     },
-    reliability: {
-      title: 'Zero Downtime Architecture',
-      stat: '99.999%',
-      sub: 'Guaranteed Production SLA',
-      badge: 'Automated self-healing',
-      description: 'Autonomous failover triggers health checkpoints and routes traffic away from degraded pods without human intervention.'
+    europa: {
+      name: 'Oceanus Cryo-Drill',
+      type: 'Jupiter Moon · Subsurface Ocean',
+      distance: '628 Million km',
+      travelTime: '2.4 Years (Gravity Slingshot)',
+      gravity: '0.134 g',
+      temperature: '-160°C Surface Crust',
+      atmosphere: 'Trace Molecular Oxygen (O2)',
+      waterIce: 'Global Liquid Saltwater Ocean under 15km Ice',
+      badge: 'Target for Extraterrestrial Micro-Organisms',
+      color: 'from-cyan-500 to-blue-700',
+      accent: 'text-cyan-400'
+    },
+    titan: {
+      name: 'Kraken Mare Station',
+      type: 'Saturn Moon · Hydrocarbon Seas',
+      distance: '1.4 Billion km',
+      travelTime: '4.8 Years (High-Isp Ion Mesh)',
+      gravity: '0.138 g',
+      temperature: '-179°C Cryogenic Liquid',
+      atmosphere: '98.4% Dense Nitrogen (1.45 atm)',
+      waterIce: 'Liquid Methane/Ethane Rain & Lakes',
+      badge: 'Abundant Cryo-Fuel Extraction Reserve',
+      color: 'from-orange-500 to-amber-700',
+      accent: 'text-orange-400'
     }
   };
 
-  const features = [
+  const techPillars = [
     {
-      icon: Cpu,
-      title: 'Autonomous Intelligence Engine',
-      description: 'Deep neural networks analyze telemetry patterns to predict capacity crunches and bottlenecks before they hit production.',
-      tag: 'AI-Powered',
-      color: 'from-blue-500 to-indigo-600'
+      icon: Flame,
+      title: 'Magnetoplasmadynamic Drives',
+      desc: 'Superheated plasma accelerated by magnetic fields achieves exhaust velocities up to 110 km/s, slashing interplanetary transit times in half.',
+      tag: 'Ion Propulsion',
+      gradient: 'from-cyan-500 to-blue-600'
     },
     {
-      icon: Activity,
-      title: 'Real-time Streaming Analytics',
-      description: 'Process millions of events per second with microsecond latency using our zero-allocation memory pipeline.',
-      tag: 'Ultra Fast',
-      color: 'from-indigo-500 to-purple-600'
+      icon: Orbit,
+      title: 'Centrifugal Gravity Rings',
+      desc: 'Dual counter-rotating cylindrical habitats generate a continuous 1.0G Earth-equivalent vector, mitigating bone density loss on long voyages.',
+      tag: 'Habitation',
+      gradient: 'from-violet-500 to-indigo-600'
+    },
+    {
+      icon: Wind,
+      title: 'Closed-Loop ECLSS Biosphere',
+      desc: 'Genetically engineered spirulina bioreactors produce 99.2% recyclable oxygen, water recapture, and fresh nutrient biomass in deep space.',
+      tag: 'Life Support',
+      gradient: 'from-emerald-500 to-teal-600'
+    },
+    {
+      icon: Radio,
+      title: 'Quantum Deep-Space Relays',
+      desc: 'Entangled photon transceiver arrays transmit gigabit telemetry streams across billions of kilometers with sub-nanosecond jitter.',
+      tag: 'Communications',
+      gradient: 'from-amber-500 to-orange-600'
     },
     {
       icon: ShieldCheck,
-      title: 'Enterprise SOC-2 Security',
-      description: 'End-to-end envelope encryption, automated compliance audit logs, and granular RBAC for sensitive infrastructure.',
-      tag: 'Bank-Grade',
-      color: 'from-purple-500 to-pink-600'
+      title: 'Active Magnetic Deflection',
+      desc: 'Superconducting electromagnetic shields create an artificial magnetosphere around the hull, deflecting dangerous solar proton storms.',
+      tag: 'Radiation Armor',
+      gradient: 'from-rose-500 to-pink-600'
     },
     {
-      icon: Cloud,
-      title: 'Multi-Cloud Mesh Observability',
-      description: 'Single pane of glass unifying telemetry across AWS, Google Cloud, Azure, and bare-metal Kubernetes nodes.',
-      tag: 'Hybrid Cloud',
-      color: 'from-pink-500 to-rose-600'
-    },
-    {
-      icon: Zap,
-      title: 'Instant Event Webhooks',
-      description: 'Push triggers to Slack, PagerDuty, Discord, or custom serverless endpoints whenever anomaly thresholds are met.',
-      tag: 'DevOps Ready',
-      color: 'from-amber-500 to-orange-600'
-    },
-    {
-      icon: Layers,
-      title: 'Automated Root-Cause Analysis',
-      description: 'Pinpoint breaking commits, memory leaks, and cascading API errors with pinpoint contextual trace graphs.',
-      tag: 'Zero Guesswork',
-      color: 'from-emerald-500 to-teal-600'
+      icon: Cpu,
+      title: 'Autonomous Regolith Printing',
+      desc: 'Heavy robotic rovers melt indigenous lunar and martian soil with concentrated solar mirrors to 3D-print pressurized habitat domes.',
+      tag: 'Surface Base',
+      gradient: 'from-sky-500 to-indigo-600'
     }
   ];
 
-  const testimonials = [
+  const expeditions = [
     {
-      name: 'Sarah Chen',
-      role: 'Chief Technology Officer',
-      company: 'HyperScale Systems',
-      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80',
-      quote: 'NexusAI cut our Mean-Time-To-Resolution (MTTR) by 76%. What used to take our SRE team three hours of log-digging now surfaces as a resolved action in seconds.',
-      rating: 5
+      name: 'Lunar Gateway Residency III',
+      target: 'Moon High Orbit',
+      date: 'Launch: Nov 14, 2026',
+      duration: '45 Earth Days',
+      seats: '2 Berths Remaining',
+      vessel: 'Vanguard Star-Liner',
+      price: 'Scientific & Civilian Access',
+      status: 'Payload Assembled'
     },
     {
-      name: 'Marcus Vance',
-      role: 'VP of Platform Engineering',
-      company: 'QuantData Labs',
-      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80',
-      quote: 'The real-time dashboard and telemetry visualization are years ahead of the competition. It transformed how our 200+ engineers monitor distributed services.',
-      rating: 5
+      name: 'Ares Pioneer Colonization',
+      target: 'Mars Jezero Outpost',
+      date: 'Launch: Jan 28, 2027',
+      duration: '520 Earth Days (Round Trip)',
+      seats: '4 Specialist Seats',
+      vessel: 'Titan Heavy Explorer',
+      price: 'Mission Clearance Req.',
+      status: 'Booster Integration'
     },
     {
-      name: 'Elena Rostova',
-      role: 'Lead Architect',
-      company: 'Novus FinTech',
-      avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&q=80',
-      quote: 'We migrated 15 microservices onto NexusAI in an afternoon. The dark-mode dashboard is pure art, and the alerting intelligence is astonishingly accurate.',
-      rating: 5
+      name: 'Deep-Space Solar Observatory',
+      target: 'Lagrange Point L2',
+      date: 'Launch: March 04, 2027',
+      duration: '180 Earth Days',
+      seats: 'Autonomous Mission',
+      vessel: 'Astra Probe IX',
+      price: 'Research Consortium',
+      status: 'Cryo Testing'
     }
   ];
 
-  const pricingPlans = [
-    {
-      name: 'Starter',
-      price: billingPeriod === 'annual' ? 24 : 29,
-      desc: 'Essential analytics and metrics for high-velocity startup teams.',
-      features: [
-        'Up to 10 Managed Services',
-        '100M Telemetry Events / month',
-        '14-day metric retention',
-        'Email & Slack notifications',
-        'Community & Standard support',
-        'Standard Dashboards'
-      ],
-      popular: false,
-      cta: 'Start Free Trial'
-    },
-    {
-      name: 'Professional',
-      price: billingPeriod === 'annual' ? 68 : 79,
-      desc: 'Full autonomous intelligence, tracing, and multi-cloud optimization.',
-      features: [
-        'Unlimited Managed Services',
-        '1 Billion Telemetry Events / month',
-        '90-day granular retention',
-        'Autonomous AI Anomaly Detection',
-        'Custom Webhooks & PagerDuty integration',
-        '24/7 Priority Support (1hr SLA)',
-        'Advanced Team RBAC & SSO'
-      ],
-      popular: true,
-      cta: 'Get Started with Pro'
-    },
-    {
-      name: 'Enterprise',
-      price: billingPeriod === 'annual' ? 160 : 199,
-      desc: 'Dedicated infrastructure, custom SLAs, and on-premise hybrid agents.',
-      features: [
-        'Infinite Telemetry Scaling',
-        'Full Custom Data Retention',
-        'Dedicated Solutions Architect',
-        'Custom ML Model Fine-Tuning',
-        'SOC-2 Type II & HIPAA compliance',
-        'Custom Security Review & Pen-Testing',
-        '99.999% Guaranteed SLA'
-      ],
-      popular: false,
-      cta: 'Contact Enterprise'
-    }
-  ];
+  const currentPlanet = planetaryData[selectedPlanet];
 
   return (
     <div className="relative overflow-hidden pt-20">
-      {/* Background glowing effects */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-indigo-500/20 via-purple-500/20 to-pink-500/10 rounded-full blur-3xl pointer-events-none -z-10" />
-      <div className="absolute top-96 right-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl pointer-events-none -z-10" />
+      {/* Background space void with glowing nebulae */}
+      <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-gradient-to-tr from-cyan-600/15 via-indigo-600/10 to-violet-600/15 rounded-full blur-3xl pointer-events-none -z-10" />
+      <div className="absolute top-96 right-0 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl pointer-events-none -z-10" />
 
       {/* Hero Section */}
       <section className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-20 lg:pt-20 lg:pb-28 text-center">
-        {/* Release Pill */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-medium bg-indigo-50 dark:bg-indigo-950/70 border border-indigo-200 dark:border-indigo-800 text-indigo-700 dark:text-indigo-300 mb-8 animate-fade-in hover:scale-105 transition-transform cursor-pointer shadow-sm">
-          <Sparkles className="w-3.5 h-3.5 text-indigo-500 fill-indigo-500" />
-          <span>Announcing NexusAI 2.4</span>
-          <span className="text-slate-300 dark:text-slate-600">|</span>
-          <span className="flex items-center gap-1 text-indigo-600 dark:text-indigo-400 font-semibold">
-            Autonomous Incident Mitigation <ChevronRight className="w-3.5 h-3.5" />
+        {/* Mission Status Ticker */}
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-semibold bg-cyan-50 dark:bg-cyan-950/70 border border-cyan-200 dark:border-cyan-800 text-cyan-700 dark:text-cyan-300 mb-8 animate-fade-in hover:scale-105 transition-transform cursor-pointer shadow-sm">
+          <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+          <span>LIVE MISSION: EUROPA CRYO-DRILL PASSING 4.2 AU</span>
+          <span className="text-slate-300 dark:text-slate-700">|</span>
+          <span className="flex items-center gap-1 text-cyan-600 dark:text-cyan-400">
+            Telemetry Optimal <ChevronRight className="w-3.5 h-3.5" />
           </span>
         </div>
 
         {/* Hero Headline */}
-        <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-slate-900 dark:text-white max-w-5xl mx-auto leading-[1.15]">
-          Intelligent Observability &{' '}
-          <span className="gradient-text">Real-Time Cloud</span> Operations
+        <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-slate-900 dark:text-white max-w-5xl mx-auto leading-[1.12]">
+          Civilization Beyond Earth.{' '}
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-indigo-400">
+            The Solar Frontier
+          </span>{' '}
+          Awaits.
         </h1>
 
-        {/* Hero Subtitle */}
-        <p className="mt-6 text-lg sm:text-xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto leading-relaxed font-normal">
-          NexusAI is the next-generation observability suite that unifies logs, metrics, traces, and predictive AI into a single lightning-fast dashboard. Resolve incidents before they impact users.
+        {/* Subtitle */}
+        <p className="mt-6 text-base sm:text-xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto leading-relaxed font-normal">
+          AstraNova designs, builds, and operates interplanetary spacecraft, permanent orbital habitats, and autonomous robotic terraforming bases across the Solar System.
         </p>
 
-        {/* Hero Action Buttons */}
+        {/* Hero Actions */}
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5">
           <button
-            onClick={() => onNavigate('login')}
-            className="w-full sm:w-auto px-8 py-4 text-base font-semibold text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 rounded-2xl shadow-xl shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:-translate-y-0.5 active:translate-y-0 transition-all flex items-center justify-center gap-2.5"
+            onClick={() => onNavigate('dashboard')}
+            className="w-full sm:w-auto px-8 py-4 text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-950 bg-gradient-to-r from-cyan-400 via-teal-300 to-cyan-300 hover:from-cyan-300 hover:to-teal-200 rounded-2xl shadow-xl shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:-translate-y-0.5 active:translate-y-0 transition-all flex items-center justify-center gap-2.5"
           >
-            <span>Start Free 14-Day Trial</span>
-            <ArrowRight className="w-5 h-5" />
+            <Radar className="w-5 h-5 text-slate-950" />
+            <span>Launch Mission Control Deck</span>
           </button>
 
           <button
-            onClick={() => onNavigate('dashboard')}
-            className="w-full sm:w-auto px-7 py-4 text-base font-semibold text-slate-800 dark:text-slate-200 bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-2xl shadow-sm hover:border-indigo-400 dark:hover:border-indigo-500 transition-all flex items-center justify-center gap-2.5"
+            onClick={() => onNavigate('login')}
+            className="w-full sm:w-auto px-7 py-4 text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200 bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-cyan-900/80 hover:bg-slate-50 dark:hover:bg-slate-850 rounded-2xl shadow-sm hover:border-cyan-400 dark:hover:border-cyan-500 transition-all flex items-center justify-center gap-2.5"
           >
-            <BarChart3 className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
-            <span>Explore Live Dashboard</span>
+            <Rocket className="w-5 h-5 text-cyan-500" />
+            <span>Astronaut Flight Clearance</span>
           </button>
         </div>
 
-        <div className="mt-6 flex items-center justify-center gap-6 text-xs text-slate-500 dark:text-slate-400">
+        {/* Key Metrics Badges */}
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-6 text-xs font-mono text-slate-500 dark:text-slate-400">
           <span className="flex items-center gap-1.5">
-            <CheckCircle2 className="w-4 h-4 text-emerald-500" /> No credit card required
+            <CheckCircle2 className="w-4 h-4 text-cyan-400" /> 38 Active Crew in Orbit
           </span>
           <span className="flex items-center gap-1.5">
-            <CheckCircle2 className="w-4 h-4 text-emerald-500" /> 5-minute setup
+            <CheckCircle2 className="w-4 h-4 text-cyan-400" /> 14 Planetary Landers Deployed
           </span>
           <span className="flex items-center gap-1.5">
-            <CheckCircle2 className="w-4 h-4 text-emerald-500" /> SOC-2 Certified
+            <CheckCircle2 className="w-4 h-4 text-cyan-400" /> 100% ECLSS Life-Support Recapture
           </span>
         </div>
 
-        {/* Hero Interactive Mockup Showcase */}
+        {/* Interactive Spacecraft HUD / Telemetry Showcase */}
         <div className="mt-14 relative max-w-5xl mx-auto">
-          {/* Outer glow frame */}
-          <div className="relative rounded-2xl p-1 bg-gradient-to-b from-indigo-500/30 via-purple-500/20 to-transparent shadow-2xl">
-            <div className="bg-slate-900 rounded-xl overflow-hidden border border-slate-700/60 text-left">
-              {/* Window Controls Bar */}
-              <div className="px-4 py-3 bg-slate-950/80 border-b border-slate-800 flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-rose-500/80"></div>
-                  <div className="w-3 h-3 rounded-full bg-amber-500/80"></div>
-                  <div className="w-3 h-3 rounded-full bg-emerald-500/80"></div>
-                  <span className="ml-3 text-xs font-mono text-slate-400 flex items-center gap-1.5">
-                    <Lock className="w-3 h-3 text-emerald-400" /> https://app.nexusai.cloud/production/cluster-us-east
+          <div className="relative rounded-3xl p-1 bg-gradient-to-b from-cyan-500/40 via-indigo-500/20 to-transparent shadow-2xl">
+            <div className="bg-[#050b18] rounded-2xl overflow-hidden border border-cyan-950 text-left text-white">
+              
+              {/* Cockpit Window Header */}
+              <div className="px-5 py-3.5 bg-[#030712] border-b border-cyan-950 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-3 h-3 rounded-full bg-cyan-500/80 animate-ping"></span>
+                    <span className="w-2.5 h-2.5 rounded-full bg-cyan-400"></span>
+                  </div>
+                  <span className="text-xs font-orbitron font-semibold tracking-wider text-cyan-400">
+                    ASTRA-IX STARSHIP // FLIGHT TELEMETRY HUD
                   </span>
                 </div>
-                <div className="flex items-center gap-3">
-                  <span className="inline-flex items-center gap-1 text-[11px] font-mono text-emerald-400">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span> Live Stream
-                  </span>
+                <div className="flex items-center gap-4 text-xs font-mono text-slate-400">
+                  <span className="text-emerald-400">THRUST VECTOR: 100% NOMINAL</span>
                   <button 
                     onClick={() => onNavigate('dashboard')}
-                    className="text-xs text-indigo-400 hover:text-indigo-300 flex items-center gap-1 font-medium"
+                    className="text-cyan-400 hover:text-cyan-300 font-bold underline"
                   >
-                    Open Full View <ExternalLink className="w-3 h-3" />
+                    Control Deck →
                   </button>
                 </div>
               </div>
 
-              {/* Inside Mockup Content */}
-              <div className="p-4 sm:p-6 bg-slate-950/95 space-y-5">
-                {/* Top quick stats in mockup */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
-                  <div className="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800">
-                    <span className="text-[11px] font-medium text-slate-400">Global Cluster Health</span>
-                    <div className="text-xl font-bold text-white mt-1">99.998%</div>
-                    <span className="text-[10px] text-emerald-400 font-medium">All 48 Nodes Stable</span>
+              {/* Inside Cockpit HUD Visuals */}
+              <div className="p-6 sm:p-8 space-y-6">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <div className="p-4 rounded-xl bg-slate-900/80 border border-cyan-900/60">
+                    <span className="text-[11px] font-mono text-slate-400 uppercase">Orbital Velocity</span>
+                    <div className="text-2xl font-orbitron font-bold text-cyan-300 mt-1">27,480 km/h</div>
+                    <span className="text-[10px] text-emerald-400 font-mono">Mach 22.4 · LEO Vector</span>
                   </div>
-                  <div className="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800">
-                    <span className="text-[11px] font-medium text-slate-400">Query Throughput</span>
-                    <div className="text-xl font-bold text-white mt-1">2.4M req/s</div>
-                    <span className="text-[10px] text-indigo-400 font-medium">+14.2% peak surge</span>
+                  <div className="p-4 rounded-xl bg-slate-900/80 border border-cyan-900/60">
+                    <span className="text-[11px] font-mono text-slate-400 uppercase">Artificial Gravity</span>
+                    <div className="text-2xl font-orbitron font-bold text-white mt-1">0.98 g</div>
+                    <span className="text-[10px] text-cyan-400 font-mono">Centrifuge 4.2 RPM</span>
                   </div>
-                  <div className="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800">
-                    <span className="text-[11px] font-medium text-slate-400">Median Latency</span>
-                    <div className="text-xl font-bold text-white mt-1">1.8 ms</div>
-                    <span className="text-[10px] text-emerald-400 font-medium">-0.4ms optimization</span>
+                  <div className="p-4 rounded-xl bg-slate-900/80 border border-cyan-900/60">
+                    <span className="text-[11px] font-mono text-slate-400 uppercase">Cabin Oxygen Purity</span>
+                    <div className="text-2xl font-orbitron font-bold text-white mt-1">99.4%</div>
+                    <span className="text-[10px] text-emerald-400 font-mono">Pressure 101.3 kPa</span>
                   </div>
-                  <div className="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800">
-                    <span className="text-[11px] font-medium text-slate-400">Security Threats</span>
-                    <div className="text-xl font-bold text-emerald-400 mt-1">0 Active</div>
-                    <span className="text-[10px] text-slate-400 font-medium">WAF Rules Enforced</span>
+                  <div className="p-4 rounded-xl bg-slate-900/80 border border-cyan-900/60">
+                    <span className="text-[11px] font-mono text-slate-400 uppercase">Shield Magnetic Flux</span>
+                    <div className="text-2xl font-orbitron font-bold text-emerald-400 mt-1">4.2 Tesla</div>
+                    <span className="text-[10px] text-slate-400 font-mono">Radiation Deflection Active</span>
                   </div>
                 </div>
 
-                {/* Simulated Chart Bars */}
-                <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800 space-y-3">
-                  <div className="flex items-center justify-between text-xs text-slate-400">
-                    <span className="font-semibold text-slate-200">Real-time Ingress & Egress Traffic Distribution</span>
-                    <span className="font-mono text-indigo-400">Live Telemetry Sync</span>
+                {/* Simulated Trajectory & Orbit Graphic */}
+                <div className="p-5 rounded-xl bg-[#030712] border border-cyan-950 space-y-3">
+                  <div className="flex items-center justify-between text-xs font-mono text-slate-400">
+                    <span className="text-cyan-400 font-bold uppercase tracking-wider">
+                      ● Interplanetary Slingshot Trajectory: Earth → Lunar Gateway → Mars Orbit
+                    </span>
+                    <span className="text-amber-400 font-semibold">T-MINUS 12h 44m TO BURNOUT</span>
                   </div>
-                  {/* Visual simulated stream bars */}
-                  <div className="h-28 flex items-end gap-1.5 sm:gap-2 pt-4">
-                    {[45, 62, 58, 80, 92, 75, 88, 96, 68, 84, 91, 100, 78, 86, 94, 82, 89, 95, 72, 85, 93, 88].map((val, i) => (
-                      <div key={i} className="flex-1 bg-slate-800/80 rounded-t overflow-hidden flex flex-col justify-end group">
-                        <div 
-                          style={{ height: `${val}%` }} 
-                          className="w-full bg-gradient-to-t from-indigo-600 via-indigo-400 to-purple-400 rounded-t transition-all duration-500 group-hover:brightness-125"
-                        />
+
+                  {/* Visual orbital path */}
+                  <div className="relative h-24 flex items-center justify-between px-6 overflow-hidden bg-slate-950/60 rounded-xl border border-slate-900">
+                    <div className="absolute inset-x-0 h-0.5 bg-gradient-to-r from-cyan-500 via-indigo-500 to-rose-500 opacity-60"></div>
+                    
+                    {/* Planet 1 Earth */}
+                    <div className="relative z-10 flex flex-col items-center">
+                      <div className="w-10 h-10 rounded-full bg-blue-600 ring-4 ring-blue-500/20 shadow-lg shadow-blue-500/40 flex items-center justify-center text-[10px] font-bold">
+                        EARTH
                       </div>
-                    ))}
-                  </div>
-                  <div className="flex justify-between text-[10px] font-mono text-slate-500">
-                    <span>12:00 UTC</span>
-                    <span>12:15 UTC</span>
-                    <span>12:30 UTC</span>
-                    <span>12:45 UTC</span>
-                    <span>Current</span>
+                      <span className="text-[10px] font-mono text-slate-400 mt-1">Departed</span>
+                    </div>
+
+                    {/* Ship Vector */}
+                    <div className="relative z-10 flex flex-col items-center animate-pulse">
+                      <div className="w-7 h-7 rounded-lg bg-cyan-400 text-black flex items-center justify-center shadow-lg shadow-cyan-400/50">
+                        <Rocket className="w-4 h-4 rotate-45" />
+                      </div>
+                      <span className="text-[10px] font-mono text-cyan-300 font-bold mt-1">Current Position</span>
+                    </div>
+
+                    {/* Planet 2 Moon */}
+                    <div className="relative z-10 flex flex-col items-center">
+                      <div className="w-8 h-8 rounded-full bg-slate-400 ring-2 ring-slate-300/30 flex items-center justify-center text-[9px] font-bold text-black">
+                        LUNA
+                      </div>
+                      <span className="text-[10px] font-mono text-slate-400 mt-1">Gateway L2</span>
+                    </div>
+
+                    {/* Planet 3 Mars */}
+                    <div className="relative z-10 flex flex-col items-center">
+                      <div className="w-11 h-11 rounded-full bg-rose-600 ring-4 ring-rose-500/30 shadow-lg shadow-rose-500/40 flex items-center justify-center text-[10px] font-bold">
+                        MARS
+                      </div>
+                      <span className="text-[10px] font-mono text-rose-300 mt-1">Destination</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -316,89 +331,172 @@ export default function LandingPage({ onNavigate }) {
           </div>
 
           {/* Floating badge 1 */}
-          <div className="absolute -top-4 -left-4 sm:-left-6 hidden sm:flex items-center gap-3 p-3 bg-white dark:bg-slate-800/90 backdrop-blur-md rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700 animate-float">
-            <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center">
-              <TrendingUp className="w-5 h-5" />
+          <div className="absolute -top-4 -left-4 sm:-left-6 hidden sm:flex items-center gap-3 p-3 bg-white dark:bg-[#070e20] backdrop-blur-md rounded-2xl shadow-2xl border border-slate-200 dark:border-cyan-800/80 animate-float-slow">
+            <div className="w-10 h-10 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center">
+              <Orbit className="w-5 h-5" />
             </div>
             <div className="text-left">
-              <p className="text-xs text-slate-500 dark:text-slate-400">Cloud Efficiency</p>
-              <p className="text-sm font-bold text-slate-900 dark:text-white">+38.5% ROI</p>
+              <p className="text-[10px] font-mono uppercase tracking-wider text-slate-400">Mission Status</p>
+              <p className="text-xs font-orbitron font-bold text-slate-900 dark:text-white">Earth-Moon Transit</p>
             </div>
           </div>
 
           {/* Floating badge 2 */}
-          <div className="absolute -bottom-5 -right-4 sm:-right-6 hidden sm:flex items-center gap-3 p-3 bg-white dark:bg-slate-800/90 backdrop-blur-md rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700 animate-float" style={{ animationDelay: '2s' }}>
-            <div className="w-10 h-10 rounded-xl bg-indigo-500/10 text-indigo-500 flex items-center justify-center">
-              <Zap className="w-5 h-5" />
+          <div className="absolute -bottom-5 -right-4 sm:-right-6 hidden sm:flex items-center gap-3 p-3 bg-white dark:bg-[#070e20] backdrop-blur-md rounded-2xl shadow-2xl border border-slate-200 dark:border-cyan-800/80 animate-float-slow" style={{ animationDelay: '3s' }}>
+            <div className="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center">
+              <Sun className="w-5 h-5" />
             </div>
             <div className="text-left">
-              <p className="text-xs text-slate-500 dark:text-slate-400">Autonomous Mitigation</p>
-              <p className="text-sm font-bold text-slate-900 dark:text-white">Resolved in 140ms</p>
+              <p className="text-[10px] font-mono uppercase tracking-wider text-slate-400">Solar Array Yield</p>
+              <p className="text-xs font-orbitron font-bold text-slate-900 dark:text-white">4.8 Gigawatts Output</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Trusted By Logos */}
-      <section className="py-12 border-y border-slate-200 dark:border-slate-800/80 bg-slate-100/50 dark:bg-slate-900/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-6">
-            Trusted by modern infrastructure & engineering teams worldwide
-          </p>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6 items-center justify-center opacity-70 dark:opacity-60 grayscale hover:grayscale-0 transition-all">
-            <div className="font-bold text-lg tracking-tight text-slate-700 dark:text-slate-300">CLOUDSCALE</div>
-            <div className="font-bold text-lg tracking-tight text-slate-700 dark:text-slate-300">DATAVORTEX</div>
-            <div className="font-bold text-lg tracking-tight text-slate-700 dark:text-slate-300">PULSEENGINE</div>
-            <div className="font-bold text-lg tracking-tight text-slate-700 dark:text-slate-300">HYPERNET</div>
-            <div className="font-bold text-lg tracking-tight text-slate-700 dark:text-slate-300">APEXSTACK</div>
-            <div className="font-bold text-lg tracking-tight text-slate-700 dark:text-slate-300">QUANTFLOW</div>
+      {/* Interactive Planetary Habitability & Transit Simulator */}
+      <section id="simulator" className="py-24 bg-slate-900/90 text-white relative border-y border-cyan-950">
+        <div className="absolute inset-0 bg-[radial-gradient(#06b6d4_1px,transparent_1px)] [background-size:24px_24px] opacity-15"></div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div className="text-center max-w-3xl mx-auto mb-14">
+            <span className="text-xs font-orbitron font-bold uppercase tracking-wider text-cyan-400 bg-cyan-950/80 px-3.5 py-1.5 rounded-full border border-cyan-800">
+              Interactive Mission Simulator
+            </span>
+            <h2 className="font-display text-3xl sm:text-5xl font-extrabold mt-4">
+              Explore Our Planetary Outposts
+            </h2>
+            <p className="text-slate-400 mt-2 text-sm">
+              Select a celestial destination to inspect real-time orbital distance, gravitational specs, and surface survival telemetry.
+            </p>
+
+            {/* Destination Selection Tabs */}
+            <div className="mt-8 flex flex-wrap justify-center gap-2 p-1.5 bg-[#030712] rounded-2xl max-w-lg mx-auto border border-cyan-950">
+              {['moon', 'mars', 'europa', 'titan'].map((planet) => (
+                <button
+                  key={planet}
+                  onClick={() => setSelectedPlanet(planet)}
+                  className={`flex-1 py-2 px-3 text-xs font-orbitron uppercase font-bold rounded-xl transition-all ${
+                    selectedPlanet === planet
+                      ? 'bg-cyan-500 text-black shadow-md shadow-cyan-500/30'
+                      : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
+                  }`}
+                >
+                  {planet}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Selected Planet Specification Card */}
+          <div className="max-w-4xl mx-auto p-8 rounded-3xl bg-[#050b18] border border-cyan-900/80 shadow-2xl backdrop-blur-md grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+            
+            <div className="md:col-span-7 space-y-4">
+              <span className="text-xs font-mono uppercase tracking-widest text-cyan-400">
+                {currentPlanet.badge}
+              </span>
+              <h3 className="text-3xl font-display font-bold">
+                {currentPlanet.name}
+              </h3>
+              <p className="text-xs font-mono text-slate-400">
+                {currentPlanet.type}
+              </p>
+
+              <div className="grid grid-cols-2 gap-3 pt-3">
+                <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800">
+                  <span className="text-[10px] font-mono uppercase text-slate-400">Earth Distance</span>
+                  <p className="text-sm font-bold text-white mt-0.5">{currentPlanet.distance}</p>
+                </div>
+                <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800">
+                  <span className="text-[10px] font-mono uppercase text-slate-400">Transit Duration</span>
+                  <p className="text-sm font-bold text-cyan-400 mt-0.5">{currentPlanet.travelTime}</p>
+                </div>
+                <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800">
+                  <span className="text-[10px] font-mono uppercase text-slate-400">Surface Gravity</span>
+                  <p className="text-sm font-bold text-white mt-0.5">{currentPlanet.gravity}</p>
+                </div>
+                <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800">
+                  <span className="text-[10px] font-mono uppercase text-slate-400">Surface Temp</span>
+                  <p className="text-sm font-bold text-amber-400 mt-0.5">{currentPlanet.temperature}</p>
+                </div>
+              </div>
+
+              <div className="pt-2 text-xs text-slate-400 space-y-1">
+                <p><span className="text-white font-semibold">Atmospheric Composition:</span> {currentPlanet.atmosphere}</p>
+                <p><span className="text-white font-semibold">Water / Volatiles:</span> {currentPlanet.waterIce}</p>
+              </div>
+
+              <div className="pt-4">
+                <button
+                  onClick={() => onNavigate('dashboard')}
+                  className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-black font-orbitron font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md flex items-center gap-2"
+                >
+                  <span>Open {currentPlanet.name} Live Feed</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+
+            {/* Visual Planet Sphere Mockup */}
+            <div className="md:col-span-5 flex flex-col items-center justify-center p-6 rounded-2xl bg-gradient-to-b from-[#081226] to-[#02050f] border border-cyan-950">
+              <div className={`w-44 h-44 rounded-full bg-gradient-to-tr ${currentPlanet.color} shadow-2xl ring-4 ring-cyan-500/20 relative flex items-center justify-center overflow-hidden animate-pulse-glow`}>
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,#ffffff44,transparent_70%)]"></div>
+                <span className="text-xs font-orbitron font-bold uppercase tracking-wider text-white/80 drop-shadow">
+                  {selectedPlanet}
+                </span>
+              </div>
+              <div className="mt-4 text-center font-mono text-[11px] text-slate-400">
+                <span>ORBITAL RECONNAISSANCE PASS: OK</span>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section id="features" className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Breakthrough Technology Pillars */}
+      <section id="propulsion" className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/60 px-3 py-1 rounded-full border border-indigo-200 dark:border-indigo-800">
-            Engineered For Scale
+          <span className="text-xs font-orbitron font-bold uppercase tracking-wider text-cyan-600 dark:text-cyan-400 bg-cyan-50 dark:bg-cyan-950/80 px-3.5 py-1.5 rounded-full border border-cyan-200 dark:border-cyan-800">
+            Deep Space Architecture
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mt-4">
-            Everything You Need To Operate Modern Cloud Systems
+          <h2 className="font-display text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-white mt-4">
+            Engineered For Permanent Interplanetary Habitation
           </h2>
           <p className="text-slate-600 dark:text-slate-400 mt-3 text-base">
-            Replace dozens of fragmented monitoring tools with one unified high-performance operational intelligence suite.
+            From high-impulse ion drives to closed-loop biospheres, explore the systems making human life multi-planetary.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {features.map((f, idx) => {
-            const IconComponent = f.icon;
+          {techPillars.map((p, idx) => {
+            const Icon = p.icon;
             return (
               <div
                 key={idx}
-                className="group relative p-8 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800 hover:border-indigo-400 dark:hover:border-indigo-500 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between"
+                className="group relative p-8 rounded-3xl bg-white dark:bg-[#070e20] border border-slate-200/80 dark:border-cyan-950/80 hover:border-cyan-500 dark:hover:border-cyan-500 shadow-sm hover:shadow-xl hover:shadow-cyan-500/10 transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between mb-5">
-                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-tr ${f.color} flex items-center justify-center text-white shadow-md shadow-indigo-500/20 group-hover:scale-110 transition-transform`}>
-                      <IconComponent className="w-6 h-6" />
+                    <div className={`w-12 h-12 rounded-2xl bg-gradient-to-tr ${p.gradient} flex items-center justify-center text-white shadow-md shadow-cyan-500/20 group-hover:scale-110 transition-transform`}>
+                      <Icon className="w-6 h-6" />
                     </div>
-                    <span className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
-                      {f.tag}
+                    <span className="text-[10px] font-orbitron font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-cyan-300 border border-slate-200 dark:border-slate-700">
+                      {p.tag}
                     </span>
                   </div>
 
-                  <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
-                    {f.title}
+                  <h3 className="font-display text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">
+                    {p.title}
                   </h3>
 
-                  <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-                    {f.description}
+                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                    {p.desc}
                   </p>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800/80 flex items-center text-xs font-semibold text-indigo-600 dark:text-indigo-400 group-hover:translate-x-1 transition-transform">
-                  <span>Learn how it works</span>
+                <div className="mt-6 pt-4 border-t border-slate-100 dark:border-cyan-950 flex items-center text-xs font-semibold text-cyan-600 dark:text-cyan-400 group-hover:translate-x-1 transition-transform">
+                  <span>Inspect Engineering Specifications</span>
                   <ChevronRight className="w-4 h-4 ml-1" />
                 </div>
               </div>
@@ -407,214 +505,64 @@ export default function LandingPage({ onNavigate }) {
         </div>
       </section>
 
-      {/* Interactive Metric Showcase Section */}
-      <section id="metrics" className="py-20 bg-slate-900 text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(#6366f1_1px,transparent_1px)] [background-size:24px_24px] opacity-15"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="text-xs font-bold uppercase tracking-wider text-indigo-400 bg-indigo-950/80 px-3 py-1 rounded-full border border-indigo-800">
-              Interactive Benchmark
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold mt-3">
-              Performance You Can Measure In Real Time
-            </h2>
-            <p className="text-slate-400 mt-2 text-sm">
-              Select a dimension to observe how NexusAI optimizes critical infrastructure metrics.
-            </p>
-          </div>
-
-          {/* Metric Selector Tabs */}
-          <div className="flex justify-center gap-2 p-1.5 bg-slate-800/80 rounded-2xl max-w-md mx-auto mb-10 border border-slate-700">
-            {Object.keys(metricTabs).map((key) => (
-              <button
-                key={key}
-                onClick={() => setActiveMetricTab(key)}
-                className={`flex-1 py-2 px-3 text-xs sm:text-sm font-semibold rounded-xl capitalize transition-all ${
-                  activeMetricTab === key 
-                    ? 'bg-indigo-600 text-white shadow-md' 
-                    : 'text-slate-400 hover:text-white hover:bg-slate-700/50'
-                }`}
-              >
-                {key}
-              </button>
-            ))}
-          </div>
-
-          {/* Metric Card Display */}
-          <div className="max-w-3xl mx-auto p-8 rounded-3xl bg-slate-800/90 border border-slate-700 shadow-2xl backdrop-blur-sm grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-            <div>
-              <span className="text-xs font-mono uppercase tracking-wider text-indigo-400">
-                {metricTabs[activeMetricTab].badge}
-              </span>
-              <h3 className="text-2xl font-bold mt-2">
-                {metricTabs[activeMetricTab].title}
-              </h3>
-              <p className="text-slate-400 text-sm mt-3 leading-relaxed">
-                {metricTabs[activeMetricTab].description}
-              </p>
-              <div className="mt-6 flex items-center gap-3">
-                <button
-                  onClick={() => onNavigate('dashboard')}
-                  className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold rounded-xl transition-all flex items-center gap-2"
-                >
-                  Inspect in Live Dashboard
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </button>
-              </div>
-            </div>
-
-            <div className="p-6 rounded-2xl bg-slate-950/70 border border-slate-800 text-center flex flex-col items-center justify-center">
-              <span className="text-xs font-mono text-slate-400 uppercase tracking-widest">Calculated Benchmark</span>
-              <div className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-300 my-2">
-                {metricTabs[activeMetricTab].stat}
-              </div>
-              <span className="text-sm font-medium text-slate-300">
-                {metricTabs[activeMetricTab].sub}
-              </span>
-              <div className="w-full mt-4 pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-500 font-mono">
-                <span>Confidence: 99.8%</span>
-                <span className="text-emerald-400">Verified</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials Section */}
-      <section id="testimonials" className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/60 px-3 py-1 rounded-full border border-indigo-200 dark:border-indigo-800">
-            Customer Validation
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mt-4">
-            Loved By Infrastructure Leaders
-          </h2>
-          <p className="text-slate-600 dark:text-slate-400 mt-2 text-base">
-            See how engineering teams around the world achieve uninterrupted reliability.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {testimonials.map((t, idx) => (
-            <div
-              key={idx}
-              className="p-8 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all flex flex-col justify-between"
-            >
-              <div>
-                <div className="flex items-center gap-1 text-amber-400 mb-4">
-                  {[...Array(t.rating)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-amber-400" />
-                  ))}
-                </div>
-                <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed italic mb-6">
-                  "{t.quote}"
-                </p>
-              </div>
-
-              <div className="flex items-center gap-3.5 pt-4 border-t border-slate-100 dark:border-slate-800">
-                <img
-                  src={t.avatar}
-                  alt={t.name}
-                  className="w-11 h-11 rounded-full object-cover ring-2 ring-indigo-500/30"
-                />
-                <div>
-                  <h4 className="text-sm font-bold text-slate-900 dark:text-white">{t.name}</h4>
-                  <p className="text-xs text-slate-500 dark:text-slate-400">{t.role} · {t.company}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Pricing Section */}
-      <section id="pricing" className="py-24 bg-slate-100/60 dark:bg-slate-900/40 border-y border-slate-200 dark:border-slate-800">
+      {/* Flight Manifest & Expeditions Section */}
+      <section id="expeditions" className="py-24 bg-slate-100/60 dark:bg-[#040916] border-y border-slate-200 dark:border-cyan-950">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-14">
-            <span className="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/60 px-3 py-1 rounded-full border border-indigo-200 dark:border-indigo-800">
-              Transparent Pricing
+            <span className="text-xs font-orbitron font-bold uppercase tracking-wider text-cyan-600 dark:text-cyan-400 bg-cyan-50 dark:bg-cyan-950/80 px-3.5 py-1.5 rounded-full border border-cyan-200 dark:border-cyan-800">
+              Flight Manifest
             </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mt-4">
-              Predictable Plans That Grow With You
+            <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mt-4">
+              Upcoming Solar System Expeditions
             </h2>
-            <p className="text-slate-600 dark:text-slate-400 mt-2 text-base">
-              No hidden fees or unexpected surge charges. Choose the tier that matches your cloud scale.
+            <p className="text-slate-600 dark:text-slate-400 mt-2 text-sm">
+              Review current launch windows and mission berths for scientific and civilian specialists.
             </p>
-
-            {/* Toggle Monthly / Annual */}
-            <div className="mt-8 inline-flex items-center gap-3 p-1.5 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
-              <button
-                onClick={() => setBillingPeriod('monthly')}
-                className={`px-4 py-2 text-xs font-bold rounded-xl transition-all ${
-                  billingPeriod === 'monthly'
-                    ? 'bg-indigo-600 text-white shadow-sm'
-                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-                }`}
-              >
-                Monthly Billing
-              </button>
-              <button
-                onClick={() => setBillingPeriod('annual')}
-                className={`px-4 py-2 text-xs font-bold rounded-xl transition-all flex items-center gap-1.5 ${
-                  billingPeriod === 'annual'
-                    ? 'bg-indigo-600 text-white shadow-sm'
-                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-                }`}
-              >
-                <span>Annual Billing</span>
-                <span className="px-1.5 py-0.5 text-[10px] font-extrabold bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-400 rounded-md">
-                  SAVE 20%
-                </span>
-              </button>
-            </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
-            {pricingPlans.map((plan, idx) => (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {expeditions.map((exp, idx) => (
               <div
                 key={idx}
-                className={`relative rounded-3xl p-8 flex flex-col justify-between transition-all duration-300 ${
-                  plan.popular
-                    ? 'bg-white dark:bg-slate-900 border-2 border-indigo-600 dark:border-indigo-500 shadow-2xl shadow-indigo-500/15 lg:-translate-y-2'
-                    : 'bg-white dark:bg-slate-900/70 border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-md'
-                }`}
+                className="p-7 rounded-3xl bg-white dark:bg-[#070e20] border border-slate-200/80 dark:border-cyan-950 shadow-md hover:border-cyan-500 transition-all flex flex-col justify-between"
               >
-                {plan.popular && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-[11px] font-bold uppercase tracking-wider rounded-full shadow-md">
-                    Most Popular
-                  </div>
-                )}
-
                 <div>
-                  <h3 className="text-xl font-bold text-slate-900 dark:text-white">{plan.name}</h3>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 min-h-[32px]">{plan.desc}</p>
-
-                  <div className="mt-6 flex items-baseline gap-1">
-                    <span className="text-4xl font-extrabold text-slate-900 dark:text-white">${plan.price}</span>
-                    <span className="text-xs font-medium text-slate-500 dark:text-slate-400">/ user / month</span>
+                  <div className="flex items-center justify-between text-xs font-mono mb-3">
+                    <span className="text-cyan-600 dark:text-cyan-400 font-bold">{exp.target}</span>
+                    <span className="px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950 text-emerald-600 font-bold text-[10px]">
+                      {exp.status}
+                    </span>
                   </div>
 
-                  <div className="mt-8 space-y-3 pt-6 border-t border-slate-100 dark:border-slate-800">
-                    <p className="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white">Includes:</p>
-                    {plan.features.map((feat, fIdx) => (
-                      <div key={fIdx} className="flex items-center gap-2.5 text-xs text-slate-600 dark:text-slate-300">
-                        <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
-                        <span>{feat}</span>
-                      </div>
-                    ))}
+                  <h3 className="font-display text-lg font-bold text-slate-900 dark:text-white mb-1">
+                    {exp.name}
+                  </h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mb-6 font-mono">
+                    Vessel: {exp.vessel}
+                  </p>
+
+                  <div className="space-y-2.5 pt-4 border-t border-slate-100 dark:border-cyan-950 text-xs font-medium text-slate-600 dark:text-slate-300">
+                    <div className="flex items-center justify-between">
+                      <span className="text-slate-400">Launch Window:</span>
+                      <span className="font-mono text-slate-900 dark:text-white">{exp.date}</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-slate-400">Mission Duration:</span>
+                      <span className="font-mono text-slate-900 dark:text-white">{exp.duration}</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-slate-400">Berths Available:</span>
+                      <span className="font-mono text-amber-500 font-bold">{exp.seats}</span>
+                    </div>
                   </div>
                 </div>
 
-                <div className="mt-8 pt-6">
+                <div className="mt-8 pt-6 border-t border-slate-100 dark:border-cyan-950">
                   <button
                     onClick={() => onNavigate('login')}
-                    className={`w-full py-3.5 px-4 rounded-xl text-sm font-bold transition-all shadow-sm ${
-                      plan.popular
-                        ? 'bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white shadow-indigo-500/25 hover:shadow-indigo-500/40'
-                        : 'bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200'
-                    }`}
+                    className="w-full py-3 px-4 rounded-xl text-xs font-orbitron font-bold uppercase tracking-wider text-black bg-cyan-400 hover:bg-cyan-300 transition-colors shadow-md shadow-cyan-500/20"
                   >
-                    {plan.cta}
+                    Request Flight Clearance
                   </button>
                 </div>
               </div>
@@ -623,33 +571,32 @@ export default function LandingPage({ onNavigate }) {
         </div>
       </section>
 
-      {/* CTA Banner Section */}
+      {/* Mission Control CTA */}
       <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-800 text-white p-8 sm:p-14 shadow-2xl">
-          <div className="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 bg-white/10 rounded-full blur-2xl pointer-events-none" />
+        <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-cyan-950 via-slate-900 to-indigo-950 text-white p-8 sm:p-14 border border-cyan-800/80 shadow-2xl">
           <div className="relative max-w-2xl">
-            <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-white/20 backdrop-blur-md">
-              Get Started Today
+            <span className="px-3.5 py-1 rounded-full text-xs font-orbitron font-bold uppercase tracking-wider bg-cyan-500/20 text-cyan-300 border border-cyan-500/40">
+              Mission Control Clearance
             </span>
-            <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight mt-4">
-              Ready to Upgrade Your Cloud Observability?
+            <h2 className="font-display text-3xl sm:text-5xl font-extrabold tracking-tight mt-4">
+              Enter The Orbital Command Deck
             </h2>
-            <p className="mt-4 text-indigo-100 text-sm sm:text-base leading-relaxed">
-              Join thousands of engineering teams who deploy faster and sleep better with NexusAI. Free 14-day trial with full feature access.
+            <p className="mt-4 text-slate-300 text-sm sm:text-base leading-relaxed">
+              Inspect active spacecraft telemetry, control habitat life support, and review live sensor logs from Mars and the Lunar Gateway in real time.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row items-center gap-4">
               <button
-                onClick={() => onNavigate('login')}
-                className="w-full sm:w-auto px-7 py-3.5 bg-white text-indigo-600 hover:bg-indigo-50 rounded-xl text-sm font-bold transition-all shadow-lg flex items-center justify-center gap-2"
+                onClick={() => onNavigate('dashboard')}
+                className="w-full sm:w-auto px-7 py-3.5 bg-cyan-400 text-black hover:bg-cyan-300 rounded-xl text-xs font-orbitron font-bold uppercase tracking-wider transition-all shadow-lg flex items-center justify-center gap-2"
               >
-                <span>Get Started in 5 Minutes</span>
-                <ArrowRight className="w-4 h-4" />
+                <Radar className="w-4 h-4" />
+                <span>Open Telemetry Dashboard</span>
               </button>
               <button
-                onClick={() => onNavigate('dashboard')}
-                className="w-full sm:w-auto px-7 py-3.5 bg-indigo-700/60 hover:bg-indigo-700 border border-white/20 rounded-xl text-sm font-bold transition-all text-white flex items-center justify-center gap-2"
+                onClick={() => onNavigate('login')}
+                className="w-full sm:w-auto px-7 py-3.5 bg-slate-800/80 hover:bg-slate-800 border border-cyan-800 rounded-xl text-xs font-orbitron font-bold uppercase tracking-wider transition-all text-white flex items-center justify-center gap-2"
               >
-                <span>View Dashboard Preview</span>
+                <span>Cadet / Specialist Login</span>
               </button>
             </div>
           </div>
