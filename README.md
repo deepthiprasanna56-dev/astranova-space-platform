@@ -1,56 +1,46 @@
-# 🚀 NexusAI — Intelligent Cloud Observability & Operations Platform
+# 🪐 AstraNova — Interplanetary Exploration & Orbital Telemetry Deck
 
-A modern, high-performance web platform built with **React 19**, **Vite**, and **Tailwind CSS**. Features a high-converting landing page, an enterprise authentication flow with live validation and demo auto-fill, and a real-time operational dashboard with dynamic Recharts data visualizations.
+A bold, creative, and futuristic web platform built with **React 19**, **Vite**, and **Tailwind CSS**. Designed specifically around deep-space human expansion, orbital habitats, and interplanetary telemetry operations.
 
 ---
 
-## 🌟 Key Features
+## 🌌 Creative Concept & Core Highlights
 
-### 1. 🌐 Landing Page
-- **Hero Section**: Dynamic announcement pill, gradient headline typography, dual call-to-actions, and interactive simulated cluster telemetry preview.
-- **Floating Status Widgets**: Visual badges with floating micro-animations (ROI metrics, sub-millisecond MTTR, autonomous incident mitigation).
-- **Interactive Metric Showcase**: Switch between *Performance*, *Compute Efficiency*, and *Zero Downtime Reliability* benchmarks in real time.
-- **Enterprise Capabilities Grid**: 6 structured feature cards highlighting distributed telemetry, multi-cloud mesh, and SOC-2 security.
-- **Customer Social Proof**: Testimonials with star ratings, verifiable roles, and corporate client roster.
-- **Transparent Pricing Matrix**: Monthly vs. Annual billing toggle with real-time 20% discount calculation and feature checklists.
-- **Conversion CTA Banner**: High-contrast glassmorphic action banner.
+Departing completely from typical business SaaS designs, **AstraNova** brings to life a cinematic aerospace agency dedicated to human settlement across the Solar System (the Moon, Mars, Europa, and Titan).
 
-### 2. 🔐 Authentication & Security Page
-- **Dual Mode (Sign In / Register)**: Instant toggle between login and onboarding account creation.
-- **Live Form Validation**: Email regex formatting, minimum password length check, password match validation on sign up, and immediate inline feedback.
-- **Interactive Security Elements**:
-  - Show / Hide password toggle with animated eye icons.
-  - "Remember me" session persistence.
-  - "Forgot Password?" recovery modal with simulated link dispatch.
-  - Social authentication providers (Google, GitHub SSO).
-- **One-Click Demo Credentials**: "Fill Demo Info" button for instantaneous preview without manual typing.
+### 1. 🪐 Landing Page ([`LandingPage.jsx`](file:///C:/Users/deept/.gemini/antigravity/scratch/nexus-web/src/pages/LandingPage.jsx))
+- **Mission Status Ticker**: Real-time broadcast pill tracking active interplanetary probes across astronomical units (AU).
+- **Hero Cockpit HUD**: Holographic starship telemetry preview displaying Mach 22.4 orbital velocity, artificial gravity centrifuge stats, 101.3 kPa cabin pressure, and interactive orbital slingshot trajectory vector (Earth → Moon → Mars).
+- **Interactive Planetary Simulator**: Dynamic celestial switcher (*Luna Shackleton Base*, *Ares Prime Mars Outpost*, *Europa Oceanus Cryo-Drill*, *Titan Kraken Mare Station*) with real-time calculated distance from Earth, transit duration, surface gravity, temperature, and atmospheric gas analysis.
+- **Breakthrough Technology Pillars**: High-impulse magnetoplasmadynamic ion drives, rotating centrifugal artificial gravity, closed-loop ECLSS biospheres, and autonomous regolith 3D printing.
+- **Flight Manifest & Expeditions**: Scheduled launch windows with booster designations, mission berths, and status checks.
+- **Mission Control Direct CTA**: Instant jump into the command deck.
 
-### 3. 📊 High-Performance Operations Dashboard
-- **Responsive Drawer & Sidebar Navigation**:
-  - Seamless desktop sidebar & mobile slide-out drawer with backdrop blur.
-  - Route between *Overview*, *Telemetry & Logs*, *Cloud Infrastructure*, *Deployments*, *Incidents*, and *Settings*.
-  - Live cluster state indicator (US-East-1 Optimal).
-- **Real-Time KPI Cards**:
-  - Cloud Cost Optimization ($148K saved, +18.4% trend)
-  - Active Kubernetes Nodes (1,284 nodes across 12 regions)
-  - Average p99 Latency (14.2 ms, -24.8% decrease)
-  - System Health SLA (99.998%, 0 unresolved incidents)
-- **Live Resource Utilization**: Animated visual progress meters for CPU Compute, NVMe Volume Storage, and Ingress Bandwidth.
-- **Interactive Charts (Recharts)**:
-  - **Dynamic AreaChart**: Throughput & bandwidth stream with timeframe switcher (`24h`, `7d`, `30d`, `90d`).
-  - **Horizontal BarChart**: Geographical compute distribution across 5 continents with custom tooltips.
-- **Interactive Microservices & Workloads Table**:
-  - Real-time search filter and status tabs (*All*, *Operational*, *Warning*, *Deploying*).
-  - CPU & memory consumption progress bars.
-  - Interactive row actions: **Rolling Restart** simulation and **Live Stdout Terminal** inspection.
-- **Quick Deploy Modal**: Provision new microservices with custom environment, region, replica counts, and memory thresholds.
-- **Notification Drawer**: Filterable alert log with unread counts and batch read dismissal.
-- **Data Export**: One-click download of timestamped JSON audit and telemetry reports.
+### 2. 🚀 Astronaut Flight Clearance Page ([`LoginPage.jsx`](file:///C:/Users/deept/.gemini/antigravity/scratch/nexus-web/src/pages/LoginPage.jsx))
+- **Dual Clearance Modes**: Toggle between active flight pass authorization and new cadet applications.
+- **Holographic Astronaut Pass**: Preview of Flight Specialist ID, Level-5 clearance badge, station assignment (Lunar Gateway Station Alpha), and real-time medical vitals.
+- **Live Form Validation**: Callsign formatting, cipher length verification, station selection, and password visibility toggle.
+- **One-Click Commander Pass**: "**Fill Demo Pass**" button for instantaneous 1-click test authorization.
+- **Emergency Signal Reset**: Deep Space Network recovery modal.
 
-### 4. 🌗 Full Dark Mode & Light Mode Support
-- Persistent theme preference saved in `localStorage`.
-- Automatic detection of user's operating system `prefers-color-scheme`.
-- Custom glassmorphism, tailored scrollbars, and accessible high-contrast palettes for both modes.
+### 3. 🛰️ Orbital Command & Telemetry Deck ([`DashboardPage.jsx`](file:///C:/Users/deept/.gemini/antigravity/scratch/nexus-web/src/pages/DashboardPage.jsx))
+- **Flight Director Navigation Drawer** ([`Sidebar.jsx`](file:///C:/Users/deept/.gemini/antigravity/scratch/nexus-web/src/components/dashboard/Sidebar.jsx)): Fast routing between Orbital Deck, Fleet, Telemetry, Life Support, Ion Thrusters, and Astronaut Roster with orbit status pill.
+- **Command Deck Header** ([`Header.jsx`](file:///C:/Users/deept/.gemini/antigravity/scratch/nexus-web/src/components/dashboard/Header.jsx)): Stardate and frequency search with `CTRL+K` badge, live telemetry refresh, radio alert drawer, and quick launch trigger.
+- **Orbital KPI Metric Cards** ([`StatCards.jsx`](file:///C:/Users/deept/.gemini/antigravity/scratch/nexus-web/src/components/dashboard/StatCards.jsx)): Orbital Velocity (27,480 km/h · Mach 22.4), Photovoltaic Solar Output (4.82 GW), ECLSS Oxygen Purity (99.4% O2), and Active Orbiting Crew (38 Personnel).
+- **Critical Resource Gauges**: Xenon Reaction Fuel (84.6%), Magnetic Shield Deflection (94.2%), and Earth Light-Speed Delay (1.28s).
+- **Interactive Charts (Recharts)** ([`ChartsSection.jsx`](file:///C:/Users/deept/.gemini/antigravity/scratch/nexus-web/src/components/dashboard/ChartsSection.jsx)):
+  - **Dynamic AreaChart**: Ion thruster impulse vs. solar flare radiation flux with multi-timeframe toggles (`24h`, `7d`, `30d`, `90d`).
+  - **Habitat Energy Grid Chart**: Energy reserves across Gateway L2, Mars Ares, Europa Deep, and Helios stations.
+- **Spacecraft Fleet & Probe Manifest** ([`DataTable.jsx`](file:///C:/Users/deept/.gemini/antigravity/scratch/nexus-web/src/components/dashboard/DataTable.jsx)):
+  - Filter by flight status (*All*, *In Orbit*, *Surface Active*, *Delta-V Maneuver*).
+  - Search by vessel callsign, target, or role.
+  - Interactive row actions: **Command Vector Burn** and **Transponder Ping** with live telemetry feedback toasts.
+- **Launch Probe Modal** ([`QuickActionsModal.jsx`](file:///C:/Users/deept/.gemini/antigravity/scratch/nexus-web/src/components/dashboard/QuickActionsModal.jsx)): Deploy spacecraft payloads with booster selection, target celestial orbit, and instrument selection.
+- **Telemetry Export**: Instant download of timestamped JSON mission telemetry logs.
+
+### 4. 🌗 Deep Space Dark & Clean Aerospace Light Modes ([`ThemeContext.jsx`](file:///C:/Users/deept/.gemini/antigravity/scratch/nexus-web/src/context/ThemeContext.jsx))
+- **Deep Space Dark**: Cosmic voids (`#030712`), cyan ion drive glows, and starlight accents.
+- **Cleanroom Light**: Minimalist aerospace cleanroom aesthetic with titanium and orbital slate.
 
 ---
 
@@ -58,124 +48,46 @@ A modern, high-performance web platform built with **React 19**, **Vite**, and *
 
 - **Framework**: [React 19](https://react.dev/) + [Vite](https://vite.dev/)
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/)
-- **Icons**: [Lucide React](https://lucide.dev/)
 - **Data Visualization**: [Recharts](https://recharts.org/)
-- **Typography**: Google Fonts (Plus Jakarta Sans)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Typography**: Google Fonts (*Space Grotesk*, *Orbitron*, *Plus Jakarta Sans*)
 
 ---
 
-## 📁 Project Directory Structure
+## 🏃 Running Locally
 
-```text
-nexus-web/
-├── dist/                      # Production build output
-├── public/
-│   └── favicon.svg            # Custom SVG platform icon
-├── src/
-│   ├── assets/                # Static assets
-│   ├── components/            # Reusable UI components
-│   │   ├── dashboard/         # Dashboard specific modules
-│   │   │   ├── ChartsSection.jsx      # Recharts Area & Bar charts
-│   │   │   ├── DataTable.jsx          # Filterable microservices table
-│   │   │   ├── Header.jsx             # Top search, alerts, user profile
-│   │   │   ├── QuickActionsModal.jsx  # New service deployment modal
-│   │   │   ├── Sidebar.jsx            # Desktop & mobile drawer navigation
-│   │   │   └── StatCards.jsx          # KPI metric cards with trend badges
-│   │   ├── Footer.jsx         # Footer with links, status, and newsletter
-│   │   ├── Navbar.jsx         # Sticky glassmorphic navbar with mobile menu
-│   │   └── ThemeToggle.jsx    # Smooth light/dark mode switcher
-│   ├── context/
-│   │   ├── AuthContext.jsx    # User authentication & demo session state
-│   │   └── ThemeContext.jsx   # Theme state & system preference sync
-│   ├── pages/
-│   │   ├── DashboardPage.jsx  # Complete operations control center
-│   │   ├── LandingPage.jsx    # Product landing, showcase, pricing & CTA
-│   │   └── LoginPage.jsx      # Auth form with validation & quick fill
-│   ├── App.css
-│   ├── App.jsx                # Hash router & root page transitions
-│   ├── index.css              # Tailwind base, glassmorphism & scrollbars
-│   └── main.jsx               # Application entry point
-├── index.html                 # HTML shell with Google Fonts & metadata
-├── netlify.toml               # Netlify configuration & rewrite rules
-├── package.json
-├── postcss.config.js          # PostCSS Tailwind integration
-├── tailwind.config.js         # Custom theme configuration & animations
-├── vercel.json                # Vercel deployment configuration
-└── README.md
-```
-
----
-
-## 🚀 Getting Started Locally
-
-### Prerequisites
-- Node.js (v18 or newer)
-- npm or yarn
-
-### 1. Installation
-Clone the repository and install dependencies:
 ```bash
-cd nexus-web
-npm install
-```
-
-### 2. Development Server
-Start the local Vite development server:
-```bash
+cd C:\Users\deept\.gemini\antigravity\scratch\nexus-web
 npm run dev
 ```
-Open your browser at `http://localhost:5173`.
+Open **`http://localhost:5174`** (or `http://localhost:5173`) in your browser.
 
-### 3. Production Build
-Create an optimized production bundle:
+To build and preview for production:
 ```bash
 npm run build
-```
-Preview the production build locally:
-```bash
 npm run preview
 ```
 
 ---
 
-## ☁️ Deployment Instructions
+## ☁️ Deployment
 
-### Option 1: Deploy to Vercel
-1. Install Vercel CLI (or connect via GitHub):
-   ```bash
-   npm i -g vercel
-   vercel
-   ```
-2. Or in the [Vercel Dashboard](https://vercel.com/):
-   - Click **Add New Project** -> **Import Git Repository**.
-   - Framework preset will automatically be detected as **Vite**.
-   - Build command: `npm run build`
-   - Output directory: `dist`
-   - Click **Deploy**!
-
-### Option 2: Deploy to Netlify
-1. With Netlify CLI:
-   ```bash
-   npm i -g netlify-cli
-   netlify deploy --prod
-   ```
-2. Or in the [Netlify Dashboard](https://app.netlify.com/):
-   - Click **Add new site** -> **Import an existing project**.
-   - Select your GitHub repository.
-   - Build command: `npm run build`
-   - Publish directory: `dist`
-   - The included `netlify.toml` automatically handles SPA routing.
-
----
-
-## 🐙 Push to GitHub
-
-To push this codebase to your GitHub account:
-
+### Vercel Deployment
+Pre-configured with [`vercel.json`](file:///C:/Users/deept/.gemini/antigravity/scratch/nexus-web/vercel.json):
 ```bash
-git init
-git add .
-git commit -m "feat: complete NexusAI website with landing page, login page, and dashboard"
+npm i -g vercel
+vercel
+```
+
+### Netlify Deployment
+Pre-configured with [`netlify.toml`](file:///C:/Users/deept/.gemini/antigravity/scratch/nexus-web/netlify.toml):
+```bash
+npm i -g netlify-cli
+netlify deploy --prod
+```
+
+### GitHub Push
+```bash
 git branch -M main
 git remote add origin https://github.com/<YOUR-USERNAME>/<YOUR-REPO-NAME>.git
 git push -u origin main
